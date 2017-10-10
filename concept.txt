@@ -3,7 +3,7 @@ site/index
 site/register
 site/login
 
-site/myProfile
+site/myProfile/index
 site/myProfile/myAnnouncments (edit|delete|add)
 site/myProfile/addAnnouncments
 site/myProfile/editAnnouncment
@@ -11,10 +11,10 @@ site/myProfile/deleteAnnouncment
 site/myProfile/editData
 site/myProfile/changePassword
 
-site/myMessages
+site/myMessages/index
 site/MyMessages/Conversation
 
-site/Announcments
+site/Announcments/index
 site/Announcments/Category
 site/Announcments/Category/Subcategory
 site/Announcments/Announcment (by id or sth)
