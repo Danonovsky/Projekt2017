@@ -1,7 +1,7 @@
 SubSites:
-site/index
-site/register
-site/login
+site/index //done
+site/register //done
+site/login //done
 
 site/myProfile/index
 site/myProfile/myAnnouncments (edit|delete|add)
