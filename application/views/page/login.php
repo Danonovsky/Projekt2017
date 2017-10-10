@@ -11,5 +11,6 @@
   <br>
 
   <input type="submit" name="submit" value="Zaloguj się">
+  <?php echo anchor('page/register','Nie posiadasz jeszcze konta? Zarejestruj się już teraz'); ?>
 
 </form>

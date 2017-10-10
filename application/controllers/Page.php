@@ -3,14 +3,16 @@
 class Page extends CI_Controller {
   public function __construct() {
     parent::__construct();
-    $this->load->model('userManager');
+    $this->load->library('session');
     $this->load->helper('url_helper');
+    $this->load->model('userManager');
   }
 
-  public function home() {
+  public function index() {
     $data['title']=' Strona Główna';
     $this->load->view('templates/header',$data);
-    $this->load->view('page/register');
+    $this->load->view('templates/topbar');
+    $this->load->view('page/home');
     $this->load->view('templates/footer');
   }
 
@@ -31,6 +33,7 @@ class Page extends CI_Controller {
 
     if($this->form_validation->run()===false) {
       $this->load->view('templates/header',$data);
+      $this->load->view('templates/topbar');
       $this->load->view('page/register');
       $this->load->view('templates/footer');
     }
@@ -38,6 +41,7 @@ class Page extends CI_Controller {
       if($this->userManager->addUser()) {
         $data['title']='Witamy';
         $this->load->view('templates/header',$data);
+        $this->load->view('templates/topbar');
         $this->load->view('page/welcome');
         $this->load->view('templates/footer');
       }
@@ -46,6 +50,36 @@ class Page extends CI_Controller {
   }
 
   public function login() {
+    $this->load->helper('form');
+    $this->load->helper('url');
+    $this->load->library('form_validation');
 
+    $data['title']=' Logowanie';
+    $this->form_validation->set_rules('email','E-mail','trim|required|valid_email');
+    $this->form_validation->set_rules('password','Hasło','trim|required');
+
+    if($this->form_validation->run()===false) {
+      $this->load->view('templates/header',$data);
+      $this->load->view('templates/topbar');
+      $this->load->view('page/login');
+      $this->load->view('templates/footer');
+    }
+    else {
+      if($this->userManager->login()) {
+        header('Location:'.base_url());
+      }
+      else {
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/topbar');
+        $this->load->view('page/login');
+        $this->load->view('templates/footer');
+      }
+    }
   }
+
+  public function logout() {
+    $this->userManager->logout();
+    header('Location:'.base_url());
+  }
+
 }
