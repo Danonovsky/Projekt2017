@@ -1,0 +1,22 @@
+SubSites:
+site/index
+site/register
+site/login
+
+site/myProfile
+site/myProfile/myAnnouncments (edit|delete|add)
+site/myProfile/addAnnouncments
+site/myProfile/editAnnouncment
+site/myProfile/deleteAnnouncment
+site/myProfile/editData
+site/myProfile/changePassword
+
+site/myMessages
+site/MyMessages/Conversation
+
+site/Announcments
+site/Announcments/Category
+site/Announcments/Category/Subcategory
+site/Announcments/Announcment (by id or sth)
+
+management/Categories
