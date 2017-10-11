@@ -12,6 +12,7 @@ class Page extends CI_Controller {
     $data['title']=' Strona Główna';
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topbar');
+    $this->load->view('templates/navbar');
     $this->load->view('page/home');
     $this->load->view('templates/footer');
   }
@@ -29,11 +30,12 @@ class Page extends CI_Controller {
     $this->form_validation->set_rules('password','Hasło','trim|required');
     $this->form_validation->set_rules('password1','Powtórz hasło','trim|required|matches[password]');
     $this->form_validation->set_rules('phoneNr','Numer telefonu','trim|required|numeric|exact_length[9]');
-    $this->form_validation->set_rules('city','Powtórz hasło','trim|required');
+    $this->form_validation->set_rules('city','Miasto','trim|required');
 
     if($this->form_validation->run()===false) {
       $this->load->view('templates/header',$data);
       $this->load->view('templates/topbar');
+      $this->load->view('templates/navbar');
       $this->load->view('page/register');
       $this->load->view('templates/footer');
     }
@@ -42,6 +44,7 @@ class Page extends CI_Controller {
         $data['title']='Witamy';
         $this->load->view('templates/header',$data);
         $this->load->view('templates/topbar');
+        $this->load->view('templates/navbar');
         $this->load->view('page/welcome');
         $this->load->view('templates/footer');
       }
@@ -61,6 +64,7 @@ class Page extends CI_Controller {
     if($this->form_validation->run()===false) {
       $this->load->view('templates/header',$data);
       $this->load->view('templates/topbar');
+      $this->load->view('templates/navbar');
       $this->load->view('page/login');
       $this->load->view('templates/footer');
     }
@@ -71,6 +75,7 @@ class Page extends CI_Controller {
       else {
         $this->load->view('templates/header',$data);
         $this->load->view('templates/topbar');
+        $this->load->view('templates/navbar');
         $this->load->view('page/login');
         $this->load->view('templates/footer');
       }
