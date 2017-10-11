@@ -37,6 +37,7 @@ class UserManager extends CI_Model {
       return true;
     }
     else {
+      $this->session->set_flashdata('loginMessage','Błędny email i/lub hasło.');
       return false;
     }
   }

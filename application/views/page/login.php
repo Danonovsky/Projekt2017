@@ -14,3 +14,9 @@
   <?php echo anchor('page/register','Nie posiadasz jeszcze konta? Zarejestruj się już teraz'); ?>
 
 </form>
+
+<?php
+if($this->session->flashdata('loginMessage')) {
+  echo $this->session->flashdata('loginMessage');
+}
+?>

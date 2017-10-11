@@ -31,4 +31,32 @@ class ProfileManager extends CI_Model {
       return false;
     }
   }
+
+  public function updateUserPassword() {
+    $data=array(
+      'password'=>md5($this->input->post('password'))
+    );
+
+    $where=array(
+      'id'=>$this->session->userdata('id')
+    );
+
+    $actual=md5($this->input->post('actualPassword'));
+    $result=$this->db->get_where('users',array('password'=>$actual))->row_array();
+    $password=$result['password'];
+    
+    if(md5($this->input->post('actualPassword'))==$password) {
+      $result=$this->db->update('users',$data,$where);
+      if($result) {
+        $this->session->set_flashdata(array('passwordMessage'=>'Hasło zostało zmienione.'));
+      }
+      else {
+        $this->session->set_flashdata(array('passwordMessage'=>'Nie udało się zmienić hasła.'));
+      }
+    }
+    else {
+      $this->session->set_flashdata(array('passwordMessage'=>'Podane hasło jest nieprawidłowe.'));
+    }
+
+  }
 }
