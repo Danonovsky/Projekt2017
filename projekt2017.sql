@@ -35,7 +35,8 @@ CREATE TABLE `announcments` (
   `description` text NOT NULL,
   `price` float NOT NULL,
   `untilDate` date NOT NULL,
-  `title` tinytext NOT NULL
+  `title` tinytext NOT NULL,
+  `slug` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
