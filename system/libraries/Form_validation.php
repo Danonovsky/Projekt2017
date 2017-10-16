@@ -1288,6 +1288,10 @@ class CI_Form_validation {
 	public function alpha($str)
 	{
 		return ctype_alpha($str);
+		/*if(preg_match("/^[\p{Latin}[A-Za-z]+$/",$str)) {
+			return $str;
+		}
+		else return false;*/
 	}
 
 	// --------------------------------------------------------------------
