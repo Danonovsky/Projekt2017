@@ -26,7 +26,7 @@ class Admin extends CI_Model {
 
   public function checkAdmin() {
     if(!$this->session->userdata('adminLogged')) {
-      header('Location:'.base_url().'index.php/management');
+      header('Location:'.site_url('management'));
       exit();
     }
   }

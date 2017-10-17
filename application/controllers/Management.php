@@ -4,7 +4,7 @@ class Management extends CI_Controller {
     parent::__construct();
 
     $this->load->library('session');
-    $this->load->helper('url_helper');
+    $this->load->helper('url');
     $this->load->model('admin');
     $this->load->model('managementModel');
   }
@@ -44,7 +44,7 @@ class Management extends CI_Controller {
   }
 
   public function newCategory() {
-
+    $this->admin->checkAdmin();
   }
 
   public function deleteCategory() {
@@ -53,5 +53,11 @@ class Management extends CI_Controller {
 
   public function updateCategory() {
 
+  }
+
+  public function logout() {
+    $this->admin->checkAdmin();
+    $this->admin->logout();
+    redirect(site_url('management'));
   }
 }
