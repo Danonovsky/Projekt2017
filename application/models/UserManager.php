@@ -59,7 +59,7 @@ class UserManager extends CI_Model {
 
   public function checkLogged() {
     if(!$this->session->has_userdata('logged')) {
-        header('Location:'.base_url());
+        redirect(site_url());
     }
   }
 

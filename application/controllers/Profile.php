@@ -2,7 +2,7 @@
 class Profile extends CI_Controller {
   public function __construct() {
     parent::__construct();
-    $this->load->helper('url_helper');
+    $this->load->helper('url');
     $this->load->library('session');
     $this->load->model('userManager');
     $this->load->model('profileManager');

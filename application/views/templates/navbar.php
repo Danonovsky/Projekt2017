@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?=base_url()?>">Ogłoszenia pe el</a>
+      <a class="navbar-brand" href="<?=site_url()?>">Ogłoszenia pe el</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">

@@ -4,7 +4,7 @@ class Page extends CI_Controller {
   public function __construct() {
     parent::__construct();
     $this->load->library('session');
-    $this->load->helper('url_helper');
+    $this->load->helper('url');
     $this->load->model('userManager');
   }
 
@@ -19,7 +19,6 @@ class Page extends CI_Controller {
 
   public function register() {
     $this->load->helper('form');
-    $this->load->helper('url');
     $this->load->library('form_validation');
 
     $data['title']=' Rejestracja';
@@ -54,7 +53,6 @@ class Page extends CI_Controller {
 
   public function login() {
     $this->load->helper('form');
-    $this->load->helper('url');
     $this->load->library('form_validation');
 
     $data['title']=' Logowanie';
@@ -70,7 +68,7 @@ class Page extends CI_Controller {
     }
     else {
       if($this->userManager->login()) {
-        header('Location:'.base_url());
+        redirect(site_url());
       }
       else {
         $this->load->view('templates/header',$data);
@@ -84,7 +82,7 @@ class Page extends CI_Controller {
 
   public function logout() {
     $this->userManager->logout();
-    header('Location:'.base_url());
+    redirect(site_url());
   }
 
 }
