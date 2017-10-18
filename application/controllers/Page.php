@@ -15,6 +15,7 @@ class Page extends CI_Controller {
     $this->load->view('templates/navbar');
     $this->load->view('page/home');
     $this->load->view('templates/footer');
+    $this->load->view('templates/end');
   }
 
   public function register() {
@@ -37,6 +38,7 @@ class Page extends CI_Controller {
       $this->load->view('templates/navbar');
       $this->load->view('page/register');
       $this->load->view('templates/footer');
+      $this->load->view('templates/end');
     }
     else {
       if($this->userManager->addUser()) {
@@ -46,6 +48,7 @@ class Page extends CI_Controller {
         $this->load->view('templates/navbar');
         $this->load->view('page/welcome');
         $this->load->view('templates/footer');
+        $this->load->view('templates/end');
       }
     }
 
@@ -65,6 +68,7 @@ class Page extends CI_Controller {
       $this->load->view('templates/navbar');
       $this->load->view('page/login');
       $this->load->view('templates/footer');
+      $this->load->view('templates/end');
     }
     else {
       if($this->userManager->login()) {
@@ -76,6 +80,7 @@ class Page extends CI_Controller {
         $this->load->view('templates/navbar');
         $this->load->view('page/login');
         $this->load->view('templates/footer');
+        $this->load->view('templates/end');
       }
     }
   }

@@ -4,21 +4,21 @@ class Management extends CI_Controller {
     parent::__construct();
 
     $this->load->library('session');
+    $this->load->library('form_validation');
     $this->load->helper('url');
     $this->load->model('admin');
     $this->load->model('managementModel');
   }
 
   public function index() {
-    $this->load->library('form_validation');
-
-    $data['title']='Zarządzanie';
+    $data['title']='Zarządzanie - strona główna';
 
     if($this->admin->adminLogged()) {
       $this->load->view('templates/header',$data);
-      $this->load->view('templates/navbar');
+      $this->load->view('templates/managementTopbar');
       $this->load->view('management/management');
       $this->load->view('templates/footer');
+      $this->load->view('templates/end');
     }
     else {
       $this->form_validation->set_rules('login','"Login"','trim|required|min_length[3]|alpha');
@@ -26,16 +26,20 @@ class Management extends CI_Controller {
 
       if($this->form_validation->run()===false) {
         $this->load->view('templates/header',$data);
+        $this->load->view('templates/managementTopbar');
         $this->load->view('templates/navbar');
         $this->load->view('management/login');
         $this->load->view('templates/footer');
+        $this->load->view('templates/end');
       }
       else {
         if($this->admin->login()) {
           $this->load->view('templates/header',$data);
+          $this->load->view('templates/managementTopbar');
           $this->load->view('templates/navbar');
           $this->load->view('management/management');
           $this->load->view('templates/footer');
+          $this->load->view('templates/end');
         }
       }
     }
@@ -45,14 +49,39 @@ class Management extends CI_Controller {
 
   public function newCategory() {
     $this->admin->checkAdmin();
+
+    $data['title']='Zarządzanie - nowa kategoria';
+
+    $this->form_validation->set_rules('name','"Nazwa"','trim|required|alpha');
+
+    if($this->form_validation->run()===false) {
+      $this->load->view('templates/header',$data);
+      $this->load->view('templates/managementTopbar');
+      $this->load->view('templates/navbar');
+      $this->load->view('management/newCategory');
+      $this->load->view('templates/footer');
+      $this->load->view('templates/end');
+    }
   }
 
-  public function deleteCategory() {
+  public function deleteCategory($id=false) {
+    $this->admin->checkAdmin();
+    if($id===false) {
+      redirect(site_url('management'));
+    }
+    else {
 
+    }
   }
 
-  public function updateCategory() {
+  public function updateCategory($id=false) {
+    $this->admin->checkAdmin();
+    if($id===false) {
+      redirect(site_url('management'));
+    }
+    else {
 
+    }
   }
 
   public function logout() {

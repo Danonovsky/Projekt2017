@@ -16,6 +16,7 @@ class Profile extends CI_Controller {
     $this->load->view('templates/navbar');
     $this->load->view('profile/index');
     $this->load->view('templates/footer');
+    $this->load->view('templates/end');
   }
 
   public function view($id=false) {
@@ -27,6 +28,7 @@ class Profile extends CI_Controller {
       $this->load->view('templates/navbar');
       $this->load->view('profile/view');
       $this->load->view('templates/footer');
+      $this->load->view('templates/end');
     }
     else show_404();
   }
@@ -52,6 +54,7 @@ class Profile extends CI_Controller {
     $this->load->view('templates/navbar');
     $this->load->view('profile/edit');
     $this->load->view('templates/footer');
+    $this->load->view('templates/end');
   }
 
   public function changePassword() {
@@ -72,5 +75,6 @@ class Profile extends CI_Controller {
     $this->load->view('templates/navbar');
     $this->load->view('profile/changePassword');
     $this->load->view('templates/footer');
+    $this->load->view('templates/end');
   }
 }

@@ -3,6 +3,6 @@ body {
   color: #fff;
 }
 
-input {
+input,select {
   color: #000;
 }
