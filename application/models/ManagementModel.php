@@ -37,7 +37,6 @@ class ManagementModel extends CI_Model {
         $sql.=')';
         $sql1='alter table '.$category['name'].'Details add index(announcmentId)';
         $sql2='alter table '.$category['name'].'Details add CONSTRAINT FOREIGN key (announcmentId) REFERENCES announcments(id) on delete RESTRICT on UPDATE CASCADE';
-        $this->db->query('use projekt2017');
         $this->db->query($sql);
         $this->db->query($sql1);
         $this->db->query($sql2);

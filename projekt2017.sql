@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2017 at 04:07 PM
+-- Generation Time: Oct 19, 2017 at 12:46 AM
 -- Server version: 10.1.22-MariaDB
 -- PHP Version: 7.1.4
 
@@ -21,6 +21,28 @@ SET time_zone = "+00:00";
 --
 -- Database: `projekt2017`
 --
+drop database if exists projekt2017;
+create database projekt2017 collate utf8_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `admin`
+--
+
+CREATE TABLE `admin` (
+  `id` int(11) NOT NULL,
+  `login` tinytext NOT NULL,
+  `password` tinytext NOT NULL,
+  `nick` tinytext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `login`, `password`, `nick`) VALUES
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Admin1');
 
 -- --------------------------------------------------------
 
@@ -50,6 +72,13 @@ CREATE TABLE `categories` (
   `ownerId` int(11) NOT NULL,
   `name` tinytext NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `ownerId`, `name`) VALUES
+(1, 0, 'Glowna');
 
 -- --------------------------------------------------------
 
@@ -106,8 +135,22 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `password`, `name`, `surname`, `phoneNr`, `city`) VALUES
+(3, 'daniel.jozefiusk@gmail.com', '21232f297a57a5a743894a0e4a801fc3', 'Daniel', 'Jozefiuk', '666140675', 'Siedlce'),
+(4, 'marek@gmail.com', 'e061c9aea5026301e7b3ff09e9aca2cf', 'Marek', 'Mostowiak', '123456789', 'Wałbrzych');
+
+--
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `announcments`
@@ -156,6 +199,11 @@ ALTER TABLE `users`
 --
 
 --
+-- AUTO_INCREMENT for table `admin`
+--
+ALTER TABLE `admin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `announcments`
 --
 ALTER TABLE `announcments`
@@ -164,7 +212,7 @@ ALTER TABLE `announcments`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 --
 -- AUTO_INCREMENT for table `highlighted`
 --
@@ -184,7 +232,7 @@ ALTER TABLE `pictures`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- Constraints for dumped tables
 --
