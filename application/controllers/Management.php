@@ -51,16 +51,21 @@ class Management extends CI_Controller {
     $this->admin->checkAdmin();
 
     $data['title']='Zarządzanie - nowa kategoria';
+    $data['categories']=$this->managementModel->getOwners();
 
-    $this->form_validation->set_rules('name','"Nazwa"','trim|required|alpha');
+    $this->form_validation->set_rules('name','"Nazwa"','trim|required|alpha|is_unique[categories.name]');
 
     if($this->form_validation->run()===false) {
       $this->load->view('templates/header',$data);
       $this->load->view('templates/managementTopbar');
       $this->load->view('templates/navbar');
-      $this->load->view('management/newCategory');
+      $this->load->view('management/newCategory',$data);
       $this->load->view('templates/footer');
       $this->load->view('templates/end');
+    }
+    else {
+      $this->managementModel->newCategory();
+      redirect(site_url('management/newCategory'));
     }
   }
 
