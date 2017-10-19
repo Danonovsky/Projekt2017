@@ -9,6 +9,18 @@
       </tr>
     </thead>
     <tbody>
+      <?php
+      foreach($categories as $a) {
+        ?>
+        <tr>
+          <td><?=$a['id']?></td>
+          <td><?=str_replace('_',' ', $a['name'])?></td>
+          <td><?=anchor(site_url('management/editCategory/'.$a['id']),'Edytuj')?></td>
+          <td><?=anchor(site_url('management/deleteCategory/'.$a['id']),'Usuń')?></td>
+        </tr>
+        <?php
+      }
+      ?>
       <tr>
         <td colspan="4"><?=anchor('management/newCategory','Nowa kategoria')?></td>
       </tr>

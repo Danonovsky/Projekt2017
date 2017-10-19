@@ -14,6 +14,7 @@ class Management extends CI_Controller {
     $data['title']='Zarządzanie - strona główna';
 
     if($this->admin->adminLogged()) {
+      $data['categories']=$this->managementModel->getCategories(1);
       $this->load->view('templates/header',$data);
       $this->load->view('templates/managementTopbar');
       $this->load->view('management/management');
@@ -34,12 +35,7 @@ class Management extends CI_Controller {
       }
       else {
         if($this->admin->login()) {
-          $this->load->view('templates/header',$data);
-          $this->load->view('templates/managementTopbar');
-          $this->load->view('templates/navbar');
-          $this->load->view('management/management');
-          $this->load->view('templates/footer');
-          $this->load->view('templates/end');
+          redirect(site_url('management'));
         }
       }
     }
@@ -53,7 +49,7 @@ class Management extends CI_Controller {
     $data['title']='Zarządzanie - nowa kategoria';
     $data['categories']=$this->managementModel->getOwners();
 
-    $this->form_validation->set_rules('name','"Nazwa"','trim|required|alpha|is_unique[categories.name]');
+    $this->form_validation->set_rules('name','"Nazwa"','trim|required|alpha_numeric_spaces|is_unique[categories.name]');
 
     if($this->form_validation->run()===false) {
       $this->load->view('templates/header',$data);
@@ -65,7 +61,7 @@ class Management extends CI_Controller {
     }
     else {
       $this->managementModel->newCategory();
-      redirect(site_url('management/newCategory'));
+      redirect(site_url('management'));
     }
   }
 
@@ -75,11 +71,12 @@ class Management extends CI_Controller {
       redirect(site_url('management'));
     }
     else {
-
+      $this->managementModel->deleteCategory($id);
+      redirect(site_url('management'));
     }
   }
 
-  public function updateCategory($id=false) {
+  public function editCategory($id=false) {
     $this->admin->checkAdmin();
     if($id===false) {
       redirect(site_url('management'));

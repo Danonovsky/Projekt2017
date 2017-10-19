@@ -4,8 +4,16 @@ class ManagementModel extends CI_Model {
     $this->load->database();
   }
 
-  public function getCategories() {
-    return $this->db->get('categories')->result_array();
+  public function getCategories($where=false) {
+    if($where===false){
+      echo 'dupaa';
+      return $this->db->get('categories')->result_array();
+    }
+    else {
+      echo "dupa";
+      $this->db->where('id!=',$where);
+      return $this->db->get('categories')->result_array();
+    }
   }
 
   public function newCategory() {
@@ -24,7 +32,7 @@ class ManagementModel extends CI_Model {
     $category=array(
       'id'=>null,
       'ownerId'=>$this->input->post('owner'),
-      'name'=>$this->input->post('name')
+      'name'=>str_replace(' ', '_', $this->input->post('name'))
     );
 
     if($this->db->insert('categories',$category)) {
@@ -42,6 +50,22 @@ class ManagementModel extends CI_Model {
         $this->db->query($sql2);
       }
     }
+  }
+
+  public function deleteCategory($id) {
+    $r=$this->db->get_where('categories',array('id'=>$id))->row_array();
+    $r1=$this->db->get_where('categories',array('ownerId'=>$id))->result_array();
+    foreach($r1 as $a) {
+      $name=$a['name'];
+      $sql='drop table if exists '.$name.'Details';
+      $this->db->delete('categories',array('id'=>$a['id']));
+      $this->db->query($sql);
+    }
+    $name=$r['name'];
+    $sql='drop table if exists '.$name.'Details';
+    $this->db->delete('categories',array('id'=>$id));
+    $this->db->query($sql);
+    redirect(site_url('management'));
   }
 
   public function getOwners() {
