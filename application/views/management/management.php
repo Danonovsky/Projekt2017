@@ -15,7 +15,7 @@
         <tr>
           <td><?=$a['id']?></td>
           <td><?=str_replace('_',' ', $a['name'])?></td>
-          <td><?=anchor(site_url('management/editCategory/'.$a['id']),'Edytuj')?></td>
+          <td><?=anchor(site_url('management/previewCategory/'.$a['id']),'Podgląd')?></td>
           <td><?=anchor(site_url('management/deleteCategory/'.$a['id']),'Usuń')?></td>
         </tr>
         <?php

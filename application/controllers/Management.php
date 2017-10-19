@@ -17,6 +17,7 @@ class Management extends CI_Controller {
       $data['categories']=$this->managementModel->getCategories(1);
       $this->load->view('templates/header',$data);
       $this->load->view('templates/managementTopbar');
+      $this->load->view('templates/navbar');
       $this->load->view('management/management');
       $this->load->view('templates/footer');
       $this->load->view('templates/end');
@@ -76,13 +77,26 @@ class Management extends CI_Controller {
     }
   }
 
-  public function editCategory($id=false) {
+  public function previewCategory($id=false) {
     $this->admin->checkAdmin();
     if($id===false) {
       redirect(site_url('management'));
     }
     else {
-
+      $data['title']='Zarządzanie - podgląd';
+      if(($r=$this->managementModel->getFields($id))===false) {
+        redirect(site_url('management'));
+      }
+      else {
+        $data['fields']=$r;
+        $data['category']=$this->managementModel->getCategory($id);
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/managementTopbar');
+        $this->load->view('templates/navbar');
+        $this->load->view('management/previewCategory',$data);
+        $this->load->view('templates/footer');
+        $this->load->view('templates/end');
+      }
     }
   }
 

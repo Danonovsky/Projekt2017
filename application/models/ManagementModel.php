@@ -6,14 +6,18 @@ class ManagementModel extends CI_Model {
 
   public function getCategories($where=false) {
     if($where===false){
-      echo 'dupaa';
       return $this->db->get('categories')->result_array();
     }
     else {
-      echo "dupa";
       $this->db->where('id!=',$where);
       return $this->db->get('categories')->result_array();
     }
+  }
+
+  public function getCategory($id=false) {
+    if($id)
+    return $this->db->get_where('categories',array('id'=>$id))->row_array();
+    else return false;
   }
 
   public function newCategory() {
@@ -71,5 +75,20 @@ class ManagementModel extends CI_Model {
   public function getOwners() {
     $this->db->where("ownerId='0' or ownerId='1'");
     return $this->db->get('categories')->result_array();
+  }
+
+  public function getFields($id) {
+    $r=$this->db->get_where('categories',array('id'=>$id))->row_array();
+    if($r) {
+      $name=$r['name'];
+      $n=strtolower($name.'Details');
+      if($this->db->table_exists($n)) {
+        return $this->db->list_fields($n);
+      }
+      else {
+        return false;
+      }
+    }
+    else return false;
   }
 }
