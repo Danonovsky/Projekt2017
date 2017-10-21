@@ -11,7 +11,28 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li><a href="#">Link</a></li>
+        <?php
+        $cats=$this->db->get_where('categories',array('ownerId'=>1))->result_array();
+        foreach($cats as $a) {
+          ?>
+          <li><?=anchor(site_url('kategoria/'.$a['id'].'/'.strtolower(str_replace('_','-',$a['name']))),str_replace('_',' ',$a['name']))?></li>
+          <?php
+          $subs=$this->db->get_where('categories',array('ownerId'=>$a['id']))->result_array();
+          if($subs) {
+            ?>
+            <ul>
+              <?php
+              foreach($subs as $b) {
+                ?>
+                <li><?=anchor(site_url('kategoria/'.$b['id'].'/'.strtolower(str_replace('_','-',$b['name']))),str_replace('_',' ',$b['name']))?></li>
+                <?php
+              }
+              ?>
+            </ul>
+            <?php
+          }
+        }
+        ?>
       </ul>
 
     </div>

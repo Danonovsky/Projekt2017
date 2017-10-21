@@ -3,13 +3,13 @@ site/index //done
 site/register //done
 site/login //done
 
-site/myProfile/index
+site/myProfile/index //done
 site/myProfile/myAnnouncments (edit|delete|add)
 site/myProfile/addAnnouncments
 site/myProfile/editAnnouncment
 site/myProfile/deleteAnnouncment
-site/myProfile/editData
-site/myProfile/changePassword
+site/myProfile/editData //done
+site/myProfile/changePassword //done
 
 site/myMessages/index
 site/MyMessages/Conversation
@@ -19,4 +19,4 @@ site/Announcments/Category
 site/Announcments/Category/Subcategory
 site/Announcments/Announcment (by id or sth)
 
-management/Categories
+management/Categories //done

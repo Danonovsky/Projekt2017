@@ -44,7 +44,7 @@ class ProfileManager extends CI_Model {
     $actual=md5($this->input->post('actualPassword'));
     $result=$this->db->get_where('users',array('password'=>$actual))->row_array();
     $password=$result['password'];
-    
+
     if(md5($this->input->post('actualPassword'))==$password) {
       $result=$this->db->update('users',$data,$where);
       if($result) {
@@ -57,6 +57,21 @@ class ProfileManager extends CI_Model {
     else {
       $this->session->set_flashdata(array('passwordMessage'=>'Podane hasło jest nieprawidłowe.'));
     }
+  }
 
+  public function countActiveAnnouncments() {
+    $id=$this->session->userdata('id');
+    $date=date('Y-m-d');
+    $sql="select * from announcments where userId='$id' and untilDate>'$date'";
+    $query=$this->db->query($sql);
+    return $query->num_rows();
+  }
+
+  public function countUnactiveAnnouncments() {
+    $id=$this->session->userdata('id');
+    $date=date('Y-m-d');
+    $sql="select * from announcments where userId='$id' and untilDate<'$date'";
+    $query=$this->db->query($sql);
+    return $query->num_rows();
   }
 }

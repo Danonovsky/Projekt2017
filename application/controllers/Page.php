@@ -90,4 +90,16 @@ class Page extends CI_Controller {
     redirect(site_url());
   }
 
+  public function category($id=false,$ble="") {
+    if($id===false) {
+      redirect(site_url());
+    }
+    $data['title']=$ble;
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topbar');
+    $this->load->view('templates/navbar');
+    $this->load->view('templates/footer');
+    $this->load->view('templates/end');
+  }
+
 }

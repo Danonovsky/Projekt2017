@@ -11,10 +11,12 @@ class Profile extends CI_Controller {
   public function index() {
     $this->userManager->checkLogged();
     $data['title']='Twój profil';
+    $data['active']=$this->profileManager->countActiveAnnouncments();
+    $data['unactive']=$this->profileManager->countUnactiveAnnouncments();
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topbar');
     $this->load->view('templates/navbar');
-    $this->load->view('profile/index');
+    $this->load->view('profile/index',$data);
     $this->load->view('templates/footer');
     $this->load->view('templates/end');
   }
@@ -31,6 +33,18 @@ class Profile extends CI_Controller {
       $this->load->view('templates/end');
     }
     else show_404();
+  }
+
+  public function myAnnouncments($offset=1) {
+    $this->userManager->checkLogged();
+
+    $data['title']='Moje ogłoszenia';
+
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topbar');
+    $this->load->view('templates/navbar');
+    $this->load->view('templates/footer');
+    $this->load->view('templates/end');
   }
 
   public function edit() {

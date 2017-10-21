@@ -3,3 +3,5 @@
 <p>Numer telefonu: <?=$this->session->userdata('phoneNr')?></p>
 <p><?=anchor('profile/edit','Edytuj dane')?></p>
 <p><?=anchor('profile/changePassword','Zmień hasło')?></p>
+<p><?=anchor('profile/myAnnouncments','Moje ogłoszenia ('.$active.')')?></p>
+<p><?=anchor('profile/unactiveAnnouncments','Nieaktywne ogłoszenia ('.$unactive.')')?></p>
