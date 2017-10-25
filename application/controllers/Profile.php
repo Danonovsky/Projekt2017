@@ -2,7 +2,7 @@
 class Profile extends CI_Controller {
   public function __construct() {
     parent::__construct();
-    $this->load->helper('url');
+    $this->load->helper(array('url','text'));
     $this->load->library('session');
     $this->load->model('userManager');
     $this->load->model('profileManager');
@@ -10,7 +10,7 @@ class Profile extends CI_Controller {
 
   public function index() {
     $this->userManager->checkLogged();
-    $data['title']='Twój profil';
+    $data['title']='Mój profil';
     $data['active']=$this->profileManager->countActiveAnnouncments();
     $data['unactive']=$this->profileManager->countUnactiveAnnouncments();
     $this->load->view('templates/header',$data);
@@ -90,5 +90,47 @@ class Profile extends CI_Controller {
     $this->load->view('profile/changePassword');
     $this->load->view('templates/footer');
     $this->load->view('templates/end');
+  }
+
+  public function newAnnouncment() {
+    $this->userManager->checkLogged();
+    $this->load->library('form_validation');
+    $this->load->model('categoryManager');
+
+    $config['upload_path']='./img/';
+    $config['allowed_types']= 'gif|jpg|png';
+    $config['file_name']=date('YmdHis').'_'.$this->session->userdata('id');
+    $this->load->library('upload',$config);
+
+    $this->form_validation->set_rules('title','"Tytuł"','trim|required');
+    $this->form_validation->set_rules('price','"Cena"','trim|required|greater_than_equal_to[0]');
+    $this->form_validation->set_rules('description','"Opis"','trim|required');
+    $this->form_validation->set_rules('category','"Kategoria"','greater_than[-1]');//todo ładny message
+
+    if($this->form_validation->run()===true) {
+      /*if($this->upload->do_upload('pictures[]')) {
+        $data=array('uploadData'=>$this->upload->data());
+        $this->profileManager->addAnnouncment($data);
+      }
+      else {
+        echo $this->upload->display_errors();
+      }*/
+      $this->profileManager->addAnnouncment();
+    }
+    else {
+      $data['categories']=$this->categoryManager->getCategories();
+      if(!$data['categories']) {
+        exit();
+      }
+      $data['title']='Nowe ogłoszenie';
+      $data['js']='newAnnouncment.js';
+      $this->load->view('templates/header',$data);
+      $this->load->view('templates/topbar');
+      $this->load->view('templates/navbar');
+      $this->load->view('profile/newAnnouncment',$data);
+      $this->load->view('templates/footer');
+      $this->load->view('templates/script',$data);
+      $this->load->view('templates/end');
+    }
   }
 }

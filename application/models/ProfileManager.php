@@ -74,4 +74,66 @@ class ProfileManager extends CI_Model {
     $query=$this->db->query($sql);
     return $query->num_rows();
   }
+
+  public function addAnnouncment($data=false) {
+    $slug=url_title(md5($this->input->post('title')).' '.$this->session->userdata('id'),'dash',true);
+    $date = strtotime(date('Y-m-d'));
+    $newDate = date("Y-m-d", strtotime("+1 month", $date));
+
+    //BASIC DATA IMPORT
+
+    $data=array(
+      'id'=>null,
+      'userId'=>$this->session->userdata('id'),
+      'categoryId'=>$this->input->post('category'),
+      'description'=>$this->input->post('description'),
+      'price'=>$this->input->post('price'),
+      'untilDate'=>$newDate,
+      'title'=>$this->input->post('title'),
+      'slug'=>$slug
+    );
+    $basicFields=array('title','category','price','description','submit','0');
+    $this->db->insert('announcments',$data);
+    $id=$this->db->insert_id();
+
+    //ADDITIONAL DATA IMPORT
+
+    $category=$this->db->get_where('categories',array('id'=>$this->input->post('category')))->row_array();
+    $subCatname=strtolower($category['name'].'Details');
+
+    $data1=array(
+      'id'=>null,
+      'announcmentId'=>$id
+    );
+    foreach($this->input->post() as $key=>$val) {
+      if(!in_array($key,$basicFields)) {
+        $data1[$key]=$val;
+      }
+    }
+    $this->db->insert($subCatname,$data1);
+
+    //IMAGES IMPORT
+
+    $dir='img\\';
+    $files=$_FILES['pictures'];
+    $file=$dir.date('YmdHis').$this->session->userdata('id');
+    $photos=array();
+    for($i=0;$i<count($files['name']);$i++) {
+      $tmp=$files['tmp_name'][$i];
+      $name=$files['name'][$i];
+      $end = pathinfo($name,PATHINFO_EXTENSION);
+      if(is_uploaded_file($tmp)) {
+        $pathArr=explode('\\',__DIR__);
+        $path='';
+        foreach($pathArr as $a) {
+          if($a!='application' && $a!='models') $path.=$a.'\\';
+        }
+        $path.=$file.$i.'.'.$end;
+        move_uploaded_file($tmp,$path);
+        $photos[]=array('id'=>null,'announcmentId'=>$id,'path'=>$path);
+      }
+    }
+    print_r($photos);
+    $this->db->insert_batch('pictures',$photos);
+  }
 }

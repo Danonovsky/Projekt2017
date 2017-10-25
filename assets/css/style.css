@@ -3,6 +3,11 @@ body {
   color: #fff;
 }
 
-input,select {
+input, select, textarea {
   color: #000;
+}
+
+.previewPicture {
+  width: 200px;
+  height: auto;
 }
