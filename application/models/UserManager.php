@@ -63,6 +63,13 @@ class UserManager extends CI_Model {
     }
   }
 
+  public function checkAnnouncmentOwnership($id) {
+    $r=$this->db->get_where('announcments',array('id'=>$id,'userId'=>$this->session->userdata('id')))->row_array();
+    if(!$r) {
+      redirect(site_url('profile'));
+    }
+  }
+
   public function isLogged() {
     if($this->session->has_userdata('logged')) return true;
     else return false;

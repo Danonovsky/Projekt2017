@@ -39,10 +39,12 @@ class Profile extends CI_Controller {
     $this->userManager->checkLogged();
 
     $data['title']='Moje ogłoszenia';
+    $data['list']=$data['announcments']=$this->profileManager->getAnnouncments($offset);
 
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topbar');
     $this->load->view('templates/navbar');
+    $this->load->view('profile/myAnnouncments',$data);
     $this->load->view('templates/footer');
     $this->load->view('templates/end');
   }
@@ -106,16 +108,24 @@ class Profile extends CI_Controller {
     $this->form_validation->set_rules('price','"Cena"','trim|required|greater_than_equal_to[0]');
     $this->form_validation->set_rules('description','"Opis"','trim|required');
     $this->form_validation->set_rules('category','"Kategoria"','greater_than[-1]');//todo ładny message
+    $this->form_validation->set_message('greater_than','Musisz wybrać kategorię.');
+    $this->form_validation->set_message('required','{field} nie może być pusty/a.');
 
     if($this->form_validation->run()===true) {
-      /*if($this->upload->do_upload('pictures[]')) {
-        $data=array('uploadData'=>$this->upload->data());
-        $this->profileManager->addAnnouncment($data);
+      if($this->profileManager->addAnnouncment()) {
+        redirect(site_url('profile/success'));
       }
       else {
-        echo $this->upload->display_errors();
-      }*/
-      $this->profileManager->addAnnouncment();
+        $data['title']='Nowe ogłoszenie';
+        $data['js']='newAnnouncment.js';
+        $this->load->view('templates/header',$data);
+        $this->load->view('templates/topbar');
+        $this->load->view('templates/navbar');
+        $this->load->view('profile/newAnnouncment',$data);
+        $this->load->view('templates/footer');
+        $this->load->view('templates/script',$data);
+        $this->load->view('templates/end');
+      }
     }
     else {
       $data['categories']=$this->categoryManager->getCategories();
@@ -132,5 +142,44 @@ class Profile extends CI_Controller {
       $this->load->view('templates/script',$data);
       $this->load->view('templates/end');
     }
+  }
+
+  public function success() {
+    if($this->session->flashdata('addAnnouncmentSuccess')) {
+      $data['title']='Gratulacje!';
+      $this->load->view('templates/header',$data);
+      $this->load->view('templates/topbar');
+      $this->load->view('templates/navbar');
+      $this->load->view('profile/success');
+      $this->load->view('templates/footer');
+      $this->load->view('templates/end');
+    }
+    else redirect(site_url('profile'));
+  }
+
+  public function editAnnouncment($id=false) {
+    if(!$id) {
+      redirect(site_url('profile'));
+    }
+    $this->userManager->checkAnnouncmentOwnership($id);
+    $r=$this->db->get_where('announcments',array('id'=>$id))->row_array();
+    print_r($r);
+  }
+
+  public function deleteAnnouncment($id=false) {
+    if(!$id) {
+      redirect(site_url('profile'));
+    }
+    $this->userManager->checkAnnouncmentOwnership($id);
+
+    $pics=$this->db->get_where('pictures',array('announcmentId'=>$id))->result_array();
+
+    if($this->db->delete('announcments',array('id'=>$id))) {
+      foreach($pics as $a) {
+        unlink('./'.($a['path']));
+      }
+    }
+
+    redirect(site_url('profile/myAnnouncments'));
   }
 }

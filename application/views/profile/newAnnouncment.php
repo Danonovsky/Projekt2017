@@ -43,4 +43,10 @@
   <p>
     <input type="submit" name="submit" value="Zapisz zmiany">
   </p>
+
+  <p>
+    <?php
+    if($this->session->flashdata('addAnnouncmentError')) echo $this->session->flashdata('addAnnouncmentError');
+    ?>
+  </p>
 </form>

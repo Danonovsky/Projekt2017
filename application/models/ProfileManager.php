@@ -80,6 +80,10 @@ class ProfileManager extends CI_Model {
     $date = strtotime(date('Y-m-d'));
     $newDate = date("Y-m-d", strtotime("+1 month", $date));
 
+    //TRANSACTION START
+
+    $this->db->trans_start();
+
     //BASIC DATA IMPORT
 
     $data=array(
@@ -114,7 +118,7 @@ class ProfileManager extends CI_Model {
 
     //IMAGES IMPORT
 
-    $dir='img\\';
+    $dir='img/';
     $files=$_FILES['pictures'];
     $file=$dir.date('YmdHis').$this->session->userdata('id');
     $photos=array();
@@ -123,17 +127,41 @@ class ProfileManager extends CI_Model {
       $name=$files['name'][$i];
       $end = pathinfo($name,PATHINFO_EXTENSION);
       if(is_uploaded_file($tmp)) {
-        $pathArr=explode('\\',__DIR__);
-        $path='';
-        foreach($pathArr as $a) {
-          if($a!='application' && $a!='models') $path.=$a.'\\';
-        }
-        $path.=$file.$i.'.'.$end;
+        $path=$file.$i.'.'.$end;
         move_uploaded_file($tmp,$path);
         $photos[]=array('id'=>null,'announcmentId'=>$id,'path'=>$path);
       }
     }
     print_r($photos);
-    $this->db->insert_batch('pictures',$photos);
+    if(count($photos)>0) {
+      $this->db->insert_batch('pictures',$photos);
+    }
+
+    //TRANSACTION END
+
+    $this->db->trans_complete();
+
+    if($this->db->trans_status()===false) {
+      $this->session->set_flashdata('addAnnouncmentError','Wystąpił błąd podczas dodawania ogłoszenia. Spróbuj ponownie.');
+      return false;
+    }
+    else {
+      $this->session->set_flashdata('addAnnouncmentSuccess',true);
+      return true;
+    }
+  }
+
+  public function getAnnouncments($offset) {
+    $res=$this->db->get_where('announcments',array('userId'=>$this->session->userdata('id')),30,$offset*30-30)->result_array();
+    foreach($res as $a) {
+      $category=$this->db->get_where('categories',array('id'=>$a['categoryId']))->row_array();
+      $details[]=$this->db->get_where(strtolower($category['name'].'Details'),array('announcmentId'=>$a['id']))->row_array();
+      $pics[]=$this->db->get_where('pictures',array('announcmentId'=>$a['id']))->result_array();
+    }
+    if(count($res)>0) {
+      $arr=array('basic'=>$res,'details'=>$details,'pics'=>$pics);
+    }
+    else $arr=array();
+    return $arr;
   }
 }

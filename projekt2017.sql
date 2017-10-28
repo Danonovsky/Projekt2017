@@ -248,7 +248,7 @@ ALTER TABLE `announcments`
 -- Constraints for table `highlighted`
 --
 ALTER TABLE `highlighted`
-  ADD CONSTRAINT `highlighted_ibfk_1` FOREIGN KEY (`announcmentId`) REFERENCES `announcments` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `highlighted_ibfk_1` FOREIGN KEY (`announcmentId`) REFERENCES `announcments` (`id`) ON UPDATE CASCADE ;
 
 --
 -- Constraints for table `messages`
@@ -261,7 +261,7 @@ ALTER TABLE `messages`
 -- Constraints for table `pictures`
 --
 ALTER TABLE `pictures`
-  ADD CONSTRAINT `pictures_ibfk_1` FOREIGN KEY (`announcmentId`) REFERENCES `announcments` (`id`);
+  ADD CONSTRAINT `pictures_ibfk_1` FOREIGN KEY (`announcmentId`) REFERENCES `announcments` (`id`) ON UPDATE CASCADE ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
