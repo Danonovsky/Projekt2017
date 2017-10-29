@@ -236,4 +236,39 @@ class ProfileManager extends CI_Model {
 
     $this->db->update('announcments',$arr,array('id'=>$id));
   }
+
+  public function highlightAnnouncment($id) {
+    $highlighted=$this->db->get_where('highlighted',array('announcmentId'=>$id))->result_array();
+
+    if(count($highlighted)>0) {
+      $this->session->set_flashdata('highlightMessage','Posiadasz już jedno wyróżnione ogłoszenie.');
+    }
+    else {
+      $ann=$this->db->get_where('announcments',array('id'=>$id))->row_array();
+
+      $date = strtotime(date('Y-m-d'));
+      $newDate = date("Y-m-d", strtotime("+7 day", $date));
+
+      $this->db->trans_start();
+      if($newDate>$ann['untilDate']) {
+        self::renewAnnouncment($id);
+      }
+
+      $arr=array(
+        'id'=>null,
+        'announcmentId'=>$id,
+        'untilDate'=>$newDate
+      );
+      $this->db->insert('highlighted',$arr);
+
+      $this->db->trans_complete();
+
+      if($this->db->trans_status()===false) {
+        $this->session->set_flashdata('highlightMessage','Wystąpił błąd. Spróbuj ponownie.');
+      }
+      else {
+        $this->session->set_flashdata('highlightMessage','Ogłoszenie zostało wyróżnione.');
+      }
+    }
+  }
 }

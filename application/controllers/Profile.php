@@ -225,4 +225,21 @@ class Profile extends CI_Controller {
 
     redirect(site_url('profile/myUnactiveAnnouncments'));
   }
+
+  public function highlightAnnouncment($id=false) {
+    if(!$id) {
+      redirect(site_url('profile'));
+    }
+    $this->userManager->checkAnnouncmentOwnership($id);
+
+    $this->profileManager->highlightAnnouncment($id);
+
+    $data['title']='Wyróżnianie ogłoszenia';
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topbar');
+    $this->load->view('templates/navbar');
+    $this->load->view('profile/highlightAnnouncment');
+    $this->load->view('templates/footer');
+    $this->load->view('templates/end');
+  }
 }
