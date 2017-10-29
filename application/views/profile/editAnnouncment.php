@@ -32,4 +32,7 @@ foreach($result['details'] as $key=>$val) {
 <p>
   <input type="submit" value="Zapisz zmiany">
 </p>
+<p>
+  <?=anchor(site_url('profile/myAnnouncments'),'Powrót')?>
+</p>
 </form>

@@ -31,3 +31,6 @@ if($this->session->flashdata('updateMessage')) {
   echo $this->session->flashdata('updateMessage');
 }
 ?>
+<p>
+  <?=anchor(site_url('profile'),'Powrót')?>
+</p>

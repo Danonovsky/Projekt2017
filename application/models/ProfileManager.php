@@ -62,7 +62,7 @@ class ProfileManager extends CI_Model {
   public function countActiveAnnouncments() {
     $id=$this->session->userdata('id');
     $date=date('Y-m-d');
-    $sql="select * from announcments where userId='$id' and untilDate>'$date'";
+    $sql="select * from announcments where userId='$id' and untilDate>='$date'";
     $query=$this->db->query($sql);
     return $query->num_rows();
   }
@@ -146,12 +146,28 @@ class ProfileManager extends CI_Model {
       return false;
     }
     else {
-      $this->session->set_flashdata('addAnnouncmentSuccess',$id);
+      $this->session->set_flashdata('addAnnouncmentSuccess',$id.'/'.$slug);
       return true;
     }
   }
 
   public function getAnnouncments($offset) {
+    $this->db->where('untilDate>=',date('Y-m-d'));
+    $res=$this->db->get_where('announcments',array('userId'=>$this->session->userdata('id')),30,$offset*30-30)->result_array();
+    foreach($res as $a) {
+      $category=$this->db->get_where('categories',array('id'=>$a['categoryId']))->row_array();
+      $details[]=$this->db->get_where(strtolower($category['name'].'Details'),array('announcmentId'=>$a['id']))->row_array();
+      $pics[]=$this->db->get_where('pictures',array('announcmentId'=>$a['id']))->result_array();
+    }
+    if(count($res)>0) {
+      $arr=array('basic'=>$res,'details'=>$details,'pics'=>$pics);
+    }
+    else $arr=array();
+    return $arr;
+  }
+
+  public function getUnactiveAnnouncments($offset) {
+    $this->db->where('untilDate<',date('Y-m-d'));
     $res=$this->db->get_where('announcments',array('userId'=>$this->session->userdata('id')),30,$offset*30-30)->result_array();
     foreach($res as $a) {
       $category=$this->db->get_where('categories',array('id'=>$a['categoryId']))->row_array();
@@ -189,8 +205,6 @@ class ProfileManager extends CI_Model {
 
     $staticData=array('basicId','detailsId','description','price');
 
-    $details=array();
-
     foreach($this->input->post() as $key=>$val) {
       if(!in_array($key,$staticData)) {
         $details[$key]=$val;
@@ -210,5 +224,16 @@ class ProfileManager extends CI_Model {
     else {
       return true;
     }
+
+  }
+
+  public function renewAnnouncment($id) {
+    $ann=$this->db->get_where('announcments',array('id'=>$id))->row_array();
+
+    $date = strtotime(date('Y-m-d'));
+    $newDate = date("Y-m-d", strtotime("+1 month", $date));
+    $arr= array('untilDate'=>$newDate);
+
+    $this->db->update('announcments',$arr,array('id'=>$id));
   }
 }

@@ -49,6 +49,20 @@ class Profile extends CI_Controller {
     $this->load->view('templates/end');
   }
 
+  public function myUnactiveAnnouncments($offset=1) {
+    $this->userManager->checkLogged();
+
+    $data['title']='Nieaktywne ogłoszenia';
+    $data['list']=$data['announcments']=$this->profileManager->getUnactiveAnnouncments($offset);
+
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topbar');
+    $this->load->view('templates/navbar');
+    $this->load->view('profile/myUnactiveAnnouncments',$data);
+    $this->load->view('templates/footer');
+    $this->load->view('templates/end');
+  }
+
   public function edit() {
     $this->userManager->checkLogged();
     $this->load->library('form_validation');
@@ -199,5 +213,16 @@ class Profile extends CI_Controller {
     }
 
     redirect(site_url('profile/myAnnouncments'));
+  }
+
+  public function renewAnnouncment($id=false) {
+    if(!$id) {
+      redirect(site_url('profile'));
+    }
+    $this->userManager->checkAnnouncmentOwnership($id);
+
+    $this->profileManager->renewAnnouncment($id);
+
+    redirect(site_url('profile/myUnactiveAnnouncments'));
   }
 }

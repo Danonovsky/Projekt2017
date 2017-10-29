@@ -50,3 +50,7 @@
     ?>
   </p>
 </form>
+
+<p>
+  <?=anchor(site_url('profile'),'Powrót')?>
+</p>

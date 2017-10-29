@@ -26,3 +26,6 @@ if($this->session->flashdata('passwordMessage')) {
   echo $this->session->flashdata('passwordMessage');
 }
 ?>
+<p>
+  <?=anchor(site_url('profile'),'Powrót')?>
+</p>

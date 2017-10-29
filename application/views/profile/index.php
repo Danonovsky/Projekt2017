@@ -20,5 +20,5 @@
   <?=anchor('profile/myAnnouncments','Moje ogłoszenia ('.$active.')')?>
 </p>
 <p>
-  <?=anchor('profile/unactiveAnnouncments','Nieaktywne ogłoszenia ('.$unactive.')')?>
+  <?=anchor('profile/myUnactiveAnnouncments','Nieaktywne ogłoszenia ('.$unactive.')')?>
 </p>
