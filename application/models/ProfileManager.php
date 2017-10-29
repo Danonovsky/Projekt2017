@@ -76,7 +76,7 @@ class ProfileManager extends CI_Model {
   }
 
   public function addAnnouncment($data=false) {
-    $slug=url_title(md5($this->input->post('title')).' '.$this->session->userdata('id'),'dash',true);
+    $slug=url_title(convert_accented_characters($this->input->post('title')),'dash',true);
     $date = strtotime(date('Y-m-d'));
     $newDate = date("Y-m-d", strtotime("+1 month", $date));
 
@@ -146,7 +146,7 @@ class ProfileManager extends CI_Model {
       return false;
     }
     else {
-      $this->session->set_flashdata('addAnnouncmentSuccess',true);
+      $this->session->set_flashdata('addAnnouncmentSuccess',$id);
       return true;
     }
   }
@@ -163,5 +163,52 @@ class ProfileManager extends CI_Model {
     }
     else $arr=array();
     return $arr;
+  }
+
+  public function getDataToEdit($id) {
+    $basic=$this->db->get_where('announcments',array('id'=>$id))->row_array();
+    $category=$this->db->get_where('categories',array('id'=>$basic['categoryId']))->row_array();
+    $catName=$category['name'];
+    $details=$this->db->get_where(strtolower($catName.'Details'),array('announcmentId'=>$id))->row_array();
+    return array('basic'=>$basic,'details'=>$details);
+  }
+
+  public function updateAnnouncment() {
+    $basicId=$this->input->post('basicId');
+    $detailsId=$this->input->post('detailsId');
+
+    $prod=$this->db->get_where('announcments',array('id'=>$basicId))->row_array();
+    $category=$this->db->get_where('categories',array('id'=>$prod['categoryId']))->row_array();
+    $catName=$category['name'];
+
+    $basic=array(
+      'description'=>$this->input->post('description'),
+      'price'=>$this->input->post('price')
+    );
+    $details=array();
+
+    $staticData=array('basicId','detailsId','description','price');
+
+    $details=array();
+
+    foreach($this->input->post() as $key=>$val) {
+      if(!in_array($key,$staticData)) {
+        $details[$key]=$val;
+      }
+    }
+
+    $this->db->trans_start();
+
+    $this->db->update('announcments',$basic,array('id'=>$basicId));
+    $this->db->update(strtolower($catName.'Details'),$details,array('id'=>$detailsId));
+
+    $this->db->trans_complete();
+
+    if($this->db->trans_status()===false) {
+      return false;
+    }
+    else {
+      return true;
+    }
   }
 }

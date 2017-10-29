@@ -4,10 +4,10 @@ site/register //done
 site/login //done
 
 site/myProfile/index //done
-site/myProfile/myAnnouncments (edit|delete|add)
-site/myProfile/addAnnouncments
+site/myProfile/myAnnouncments (edit|delete|add) //done
+site/myProfile/addAnnouncments //done
 site/myProfile/editAnnouncment
-site/myProfile/deleteAnnouncment
+site/myProfile/deleteAnnouncment //done
 site/myProfile/editData //done
 site/myProfile/changePassword //done
 

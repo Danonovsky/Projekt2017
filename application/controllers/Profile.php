@@ -130,7 +130,7 @@ class Profile extends CI_Controller {
     else {
       $data['categories']=$this->categoryManager->getCategories();
       if(!$data['categories']) {
-        exit();
+        show_404();
       }
       $data['title']='Nowe ogłoszenie';
       $data['js']='newAnnouncment.js';
@@ -162,8 +162,26 @@ class Profile extends CI_Controller {
       redirect(site_url('profile'));
     }
     $this->userManager->checkAnnouncmentOwnership($id);
-    $r=$this->db->get_where('announcments',array('id'=>$id))->row_array();
-    print_r($r);
+
+    $this->load->library('form_validation');
+    $data['result']=$this->profileManager->getDataToEdit($id);
+
+    $this->form_validation->set_rules('price','"Cena"','trim|required|greater_than_equal_to[0]');
+    $this->form_validation->set_rules('description','"Opis"','trim|required');
+
+    if($this->form_validation->run()===true) {
+      if($this->profileManager->updateAnnouncment()===true) {
+        redirect(site_url('profile/editAnnouncment/'.$id));
+      }
+    }
+
+    $data['title']='Edycja danych';
+    $this->load->view('templates/header',$data);
+    $this->load->view('templates/topbar');
+    $this->load->view('templates/navbar');
+    $this->load->view('profile/editAnnouncment',$data);
+    $this->load->view('templates/footer');
+    $this->load->view('templates/end');
   }
 
   public function deleteAnnouncment($id=false) {
