@@ -64,7 +64,7 @@ class ProfileManager extends CI_Model {
     $date=date('Y-m-d');
     $sql="select * from announcments where userId='$id' and untilDate>='$date'";
     $query=$this->db->query($sql);
-    return $query->num_rows();
+    return ceil($query->num_rows()/30);
   }
 
   public function countUnactiveAnnouncments() {
@@ -72,7 +72,7 @@ class ProfileManager extends CI_Model {
     $date=date('Y-m-d');
     $sql="select * from announcments where userId='$id' and untilDate<'$date'";
     $query=$this->db->query($sql);
-    return $query->num_rows();
+    return ceil($query->num_rows()/30);
   }
 
   public function addAnnouncment($data=false) {

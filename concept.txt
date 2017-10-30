@@ -15,8 +15,7 @@ site/myMessages/index
 site/MyMessages/Conversation
 
 site/Announcments/index
-site/Announcments/Category
-site/Announcments/Category/Subcategory
-site/Announcments/Announcment (by id or sth)
+site/Announcments/Category/id/slug
+site/Announcments/Announcment/id/slug (by id or sth)
 
 management/Categories //done
