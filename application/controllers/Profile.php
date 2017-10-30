@@ -4,6 +4,7 @@ class Profile extends CI_Controller {
     parent::__construct();
     $this->load->helper(array('url','text'));
     $this->load->library('session');
+    $this->load->library('pagination');
     $this->load->model('userManager');
     $this->load->model('profileManager');
   }
@@ -41,13 +42,21 @@ class Profile extends CI_Controller {
     $data['title']='Moje ogłoszenia';
     $data['list']=$data['announcments']=$this->profileManager->getAnnouncments($offset);
 
+    $config['base_url'] = site_url('profile/myAnnouncments');
+    $config['total_rows'] = $this->profileManager->countActiveAnnouncments();
+    $config['per_page'] = 1;
+    $config['use_page_numbers']=TRUE;
+
+    $this->pagination->initialize($config);
+
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topbar');
     $this->load->view('templates/navbar');
     $this->load->view('profile/myAnnouncments',$data);
+    $this->load->view('templates/paginator');
     $this->load->view('templates/footer');
     $this->load->view('templates/end');
-  }
+    }
 
   public function myUnactiveAnnouncments($offset=1) {
     $this->userManager->checkLogged();
@@ -55,10 +64,18 @@ class Profile extends CI_Controller {
     $data['title']='Nieaktywne ogłoszenia';
     $data['list']=$data['announcments']=$this->profileManager->getUnactiveAnnouncments($offset);
 
+    $config['base_url'] = site_url('profile/myUnactiveAnnouncments');
+    $config['total_rows'] = $this->profileManager->countUnactiveAnnouncments();
+    $config['per_page'] = 1;
+    $config['use_page_numbers']=TRUE;
+
+    $this->pagination->initialize($config);
+
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topbar');
     $this->load->view('templates/navbar');
     $this->load->view('profile/myUnactiveAnnouncments',$data);
+    $this->load->view('templates/paginator');
     $this->load->view('templates/footer');
     $this->load->view('templates/end');
   }
