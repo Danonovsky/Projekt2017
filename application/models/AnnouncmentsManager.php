@@ -29,7 +29,7 @@ class AnnouncmentsManager extends CI_Model {
     return $arr;
   }
 
-  public function countAnnouncments($id, $slug, $offset) {
+  public function countAnnouncments($id, $slug) {
     $almostMain=$this->db->get_where('categories',array('id'=>$id,'ownerId'=>'1'))->result_array();
     if(count($almostMain)>0) {
       $this->db->where('categoryId in(select id from categories where ownerId='.$id.')');
@@ -39,6 +39,6 @@ class AnnouncmentsManager extends CI_Model {
       $this->db->where('categoryId=',$id);
       $amount=count($this->db->get_where('announcments')->result_array());
     }
-    return ceil($amount/30);
+    return $amount;
   }
 }

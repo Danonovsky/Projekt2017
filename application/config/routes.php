@@ -54,5 +54,3 @@ $route['default_controller'] = 'page';
 $route['logowanie']='page/login';
 $route['rejestracja']='page/register';
 $route['wyloguj']='page/logout';
-
-$route['kategoria/(:num)/(:any)']='announcments/category/$1/$2';

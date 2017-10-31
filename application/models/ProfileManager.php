@@ -64,7 +64,7 @@ class ProfileManager extends CI_Model {
     $date=date('Y-m-d');
     $sql="select * from announcments where userId='$id' and untilDate>='$date'";
     $query=$this->db->query($sql);
-    return ceil($query->num_rows()/30);
+    return $query->num_rows();
   }
 
   public function countUnactiveAnnouncments() {
@@ -72,7 +72,7 @@ class ProfileManager extends CI_Model {
     $date=date('Y-m-d');
     $sql="select * from announcments where userId='$id' and untilDate<'$date'";
     $query=$this->db->query($sql);
-    return ceil($query->num_rows()/30);
+    return $query->num_rows();
   }
 
   public function addAnnouncment($data=false) {
@@ -238,9 +238,14 @@ class ProfileManager extends CI_Model {
   }
 
   public function highlightAnnouncment($id) {
-    $highlighted=$this->db->get_where('highlighted',array('announcmentId'=>$id))->result_array();
+    $willBeHighlighted=true;
+    $highlighted=$this->db->get('highlighted')->result_array();
+    foreach($highlighted as $a) {
+      $single=$this->db->get_where('announcments',array('id'=>$a['announcmentId']))->row_array();
+      if($this->session->userdata('id')==$single['userId']) $willBeHighlighted=false;
+    }
 
-    if(count($highlighted)>0) {
+    if(!$willBeHighlighted) {
       $this->session->set_flashdata('highlightMessage','Posiadasz już jedno wyróżnione ogłoszenie.');
     }
     else {

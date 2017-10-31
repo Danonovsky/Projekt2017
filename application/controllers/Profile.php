@@ -39,12 +39,14 @@ class Profile extends CI_Controller {
   public function myAnnouncments($offset=1) {
     $this->userManager->checkLogged();
 
+    if($offset!=1 && $offset>ceil($this->profileManager->countActiveAnnouncments()/30)) redirect(site_url('profile/myAnnouncments'));
+
     $data['title']='Moje ogłoszenia';
     $data['list']=$data['announcments']=$this->profileManager->getAnnouncments($offset);
 
     $config['base_url'] = site_url('profile/myAnnouncments');
     $config['total_rows'] = $this->profileManager->countActiveAnnouncments();
-    $config['per_page'] = 1;
+    $config['per_page'] = 30;
     $config['use_page_numbers']=TRUE;
 
     $this->pagination->initialize($config);
@@ -60,6 +62,8 @@ class Profile extends CI_Controller {
 
   public function myUnactiveAnnouncments($offset=1) {
     $this->userManager->checkLogged();
+
+    if($offset!=1 && $offset>ceil($this->profileManager->countUnactiveAnnouncments()/30)) redirect(site_url('profile/myUnactiveAnnouncments'));
 
     $data['title']='Nieaktywne ogłoszenia';
     $data['list']=$data['announcments']=$this->profileManager->getUnactiveAnnouncments($offset);

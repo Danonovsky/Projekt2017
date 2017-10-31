@@ -25,15 +25,17 @@ class Announcments extends CI_Controller {
     if($id===false || $slug===false) {
       redirect(site_url('announcments'));
     }
+
     $data['announcments']=$this->announcmentsManager->getAnnouncments($id,$slug,$offset);
-    $config['base_url'] = site_url('kategoria/'.$id.'/'.$slug);
-    $config['total_rows'] = $this->announcmentsManager->countAnnouncments($id,$slug,$offset);
-    $config['per_page'] = 1;
+    $config['base_url'] = site_url('announcments/category/'.$id.'/'.$slug);
+    $config['total_rows'] = $this->announcmentsManager->countAnnouncments($id,$slug);
+    echo $config['total_rows'];
+    $config['per_page'] = 30;
     $config['use_page_numbers']=TRUE;
 
     $this->pagination->initialize($config);
 
-    $data['title']='Ogłoszenia';
+    $data['title']='Ogłoszenia - '.ucfirst(str_replace('-',' ',$slug));
 
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topbar');
@@ -42,8 +44,6 @@ class Announcments extends CI_Controller {
     $this->load->view('templates/paginator');
     $this->load->view('templates/footer');
     $this->load->view('templates/end');
-
-
   }
 
   public function view($id=false, $slug='') {
