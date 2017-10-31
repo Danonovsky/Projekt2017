@@ -6,7 +6,7 @@ class ProfileManager extends CI_Model {
 
   public function getUserData($id=false) {
     if($id==true) {
-      return $this->db->get_where('users',array('id'=>$id));
+      return $this->db->get_where('users',array('id'=>$id))->row_array();
     }
     else return false;
   }

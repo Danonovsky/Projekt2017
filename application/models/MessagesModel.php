@@ -18,4 +18,24 @@ class MessagesModel extends CI_Model {
     $this->db->where_in('id',$users);
     return $this->db->get('users')->result_array();
   }
+
+  public function getAllMessages($id) {
+    $userId=$this->session->userdata('id');
+    $this->db->order_by('date','asc');
+    $this->db->where("(ownerId='$id' and toId='$userId') or (ownerId='$userId' and toId='$id')");
+    $messages=$this->db->get('messages')->result_array();
+    return $messages;
+  }
+
+  public function sendMessage($id) {
+    $data=array(
+      'id'=>null,
+      'ownerId'=>$this->session->userdata('id'),
+      'toId'=>$id,
+      'date'=>date('Y-m-d H:i:s'),
+      'content'=>$this->input->post('message')
+    );
+
+    $this->db->insert('messages',$data);
+  }
 }

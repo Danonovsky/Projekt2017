@@ -23,7 +23,7 @@ class Profile extends CI_Controller {
   }
 
   public function view($id=false) {
-    $data['user']=$this->profileManager->getUserData($id)->row_array();
+    $data['user']=$this->profileManager->getUserData($id);
     if($data['user']) {
       $data['title']='Profil użytkownika '.$data['user']['name'].' '.$data['user']['surname'];
       $this->load->view('templates/header',$data);
