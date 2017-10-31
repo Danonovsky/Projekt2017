@@ -2,7 +2,7 @@
   <?php
   if($this->userManager->isLogged()) {
     ?>
-    <p>Witaj, <?=anchor('profile',$this->session->userdata('name').' '.$this->session->userdata('surname')).', '.anchor('wyloguj','Wyloguj')?></p>
+    <p>Witaj, <?=anchor('profile',$this->session->userdata('name').' '.$this->session->userdata('surname')).', ( '.anchor(site_url('messages'),'Wiadomości').' ), '.anchor('wyloguj','Wyloguj')?></p>
     <?php
   }
   else {

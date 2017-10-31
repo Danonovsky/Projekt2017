@@ -11,7 +11,7 @@ site/myProfile/deleteAnnouncment //done
 site/myProfile/editData //done
 site/myProfile/changePassword //done
 
-site/myMessages/index
+site/myMessages/index //done
 site/MyMessages/Conversation
 
 site/Announcments/index //done
