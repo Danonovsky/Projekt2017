@@ -14,8 +14,8 @@ site/myProfile/changePassword //done
 site/myMessages/index
 site/MyMessages/Conversation
 
-site/Announcments/index
-site/Announcments/Category/id/slug
-site/Announcments/Announcment/id/slug (by id or sth)
+site/Announcments/index //done
+site/Announcments/Category/id/slug //done
+site/Announcments/Announcment/id/slug (by id or sth) //done
 
 management/Categories //done

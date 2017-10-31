@@ -7,7 +7,7 @@ if(!empty($announcments)) {
     <article>
       <p>
         <img class="previewPicture" src="<?=base_url($path)?>" alt="zdjecie">
-        <span><?=anchor(site_url('ogloszenie/'.$announcments['basic'][$i]['id'].'/'.$announcments['basic'][$i]['slug']),$announcments['basic'][$i]['title'])?></span>
+        <span><?=anchor(site_url('announcments/view/'.$announcments['basic'][$i]['id'].'/'.$announcments['basic'][$i]['slug']),$announcments['basic'][$i]['title'])?></span>
       </p>
     </article>
     <?php
