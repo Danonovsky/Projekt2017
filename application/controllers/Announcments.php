@@ -30,14 +30,15 @@ class Announcments extends CI_Controller {
     if($data['announcments']===false) {
       show_404();
     }
+    $data['highlighted']=$this->announcmentsManager->getHighlighted($id);
+    $data['title']='Ogłoszenia - '.ucfirst(str_replace('-',' ',$slug));
+
     $config['base_url'] = site_url('announcments/category/'.$id.'/'.$slug);
     $config['total_rows'] = $this->announcmentsManager->countAnnouncments($id,$slug);
     $config['per_page'] = 30;
     $config['use_page_numbers']=TRUE;
 
     $this->pagination->initialize($config);
-
-    $data['title']='Ogłoszenia - '.ucfirst(str_replace('-',' ',$slug));
 
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topbar');

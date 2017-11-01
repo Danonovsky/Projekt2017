@@ -20,6 +20,7 @@ class AnnouncmentsManager extends CI_Model {
       $this->db->where('categoryId=',$id);
     }
     $this->db->where('untilDate>=',date('Y-m-d'));
+    $this->db->order_by('untilDate','desc');
 
     $res=$this->db->get_where('announcments',array(),30,$offset*30-30)->result_array();
     foreach($res as $a) {
@@ -30,6 +31,36 @@ class AnnouncmentsManager extends CI_Model {
       $arr=array('basic'=>$res,'pics'=>$pics);
     }
     else $arr=array();
+    return $arr;
+  }
+
+  public function getHighlighted($id) {
+    if($id==1) {
+      redirect(site_url('announcments'));
+    }
+    $this->db->order_by('untilDate','desc');
+    $highlighted=$this->db->get('highlighted')->result_array();
+    $mainCategory=false;
+    $check=$this->db->get_where('categories',array('ownerId'=>'1','id'=>$id))->result_array();
+    if(count($check)>0) $mainCategory=true;
+    $arr=array();
+    foreach($highlighted as $a) {
+      if(count($arr)<5) {
+        if($mainCategory) {
+          $this->db->where('categoryId in(select id from categories where ownerId='.$id.')');
+          $ann=$this->db->get_where('announcments',array('id'=>$a['announcmentId']))->row_array();
+          if(count($ann)>0) {
+            $arr[]=array('basic'=>$ann,'pics'=>$this->db->get_where('pictures',array('announcmentId'=>$ann['id']))->result_array());
+          }
+        }
+        else {
+          $ann=$this->db->get_where('announcments',array('id'=>$a['announcmentId'],'categoryId'=>$id))->row_array();
+          if(count($ann)>0) {
+            $arr[]=array('basic'=>$ann,'pics'=>$this->db->get_where('pictures',array('announcmentId'=>$ann['id']))->result_array());
+          }
+        }
+      }
+    }
     return $arr;
   }
 
