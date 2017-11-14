@@ -1,24 +1,8 @@
-<ul class="categories">
-<?php
-$cats=$this->db->get_where('categories',array('ownerId'=>1))->result_array();
-foreach($cats as $a) {
-  ?>
-  <li><?=anchor(site_url('announcments/category/'.$a['id'].'/'.strtolower(str_replace('_','-',$a['name']))),str_replace('_',' ',$a['name']))?></li>
-  <?php
-  $subs=$this->db->get_where('categories',array('ownerId'=>$a['id']))->result_array();
-  if($subs) {
-    ?>
-    <ul>
-      <?php
-      foreach($subs as $b) {
-        ?>
-        <li><?=anchor(site_url('announcments/category/'.$b['id'].'/'.strtolower(str_replace('_','-',$b['name']))),str_replace('_',' ',$b['name']))?></li>
-        <?php
-      }
-      ?>
-    </ul>
-    <?php
-  }
-}
-?>
-</ul>
+<div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
+    <div class="row ss">
+      <div class="col-lg-3 col-md-3 col-sm-6 home-content"><div class="dark">sssssssssssssssss ssssssssssssssssssss ssssssssss sssssss ssss</div></div>
+      <div class="col-lg-3 col-md-3 col-sm-6 home-content"><div class="dark">sssssssssssssssss ssssssssssssssssssss ssssssssss sssssss ssss</div></div>
+      <div class="col-lg-3 col-md-3 col-sm-6 home-content"><div class="dark">sssssssssssssssss ssssssssssssssssssss ssssssssss sssssss ssss</div></div>
+      <div class="col-lg-3 col-md-3 col-sm-6 home-content"><div class="dark">sssssssssssssssss ssssssssssssssssssss ssssssssss sssssss ssss</div></div>
+    </div>
+</div>

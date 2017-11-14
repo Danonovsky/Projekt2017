@@ -1,13 +1,59 @@
 body {
-  background: #333;
-  color: #fff;
+  background: #F0F0F0;
+  margin: 0px;
 }
 
 input, select, textarea {
   color: #000;
 }
 
+.top-panel{
+  height: 40px;
+  padding: 10px 0px 20px;
+  border-bottom: 1px solid #7C7C7C;
+}
+
+.dropdowns{
+  margin: 10px;
+}
+
+.home-content{
+  paddind:10px;
+  background-color:#FFF;
+  margin-top: 10px;
+}
+
+.dark{
+  background-color: #000;
+}
+
+footer{
+  height: 50px;
+  padding: 10px 0px 30px;
+  border-top: 1px solid #7C7C7C;
+}
+
 .previewPicture {
   width: 200px;
   height: auto;
+}
+
+.margined{
+  margin:0px 15px;
+}
+
+@media (max-width: 767px) {
+    .btn-xs-block {
+        display: block;
+        width: 100%;
+    }
+    .dropdowns{
+        width: 100%;
+        margin-left: 0px;
+    }
+    .btn-block + .btn-xs-block,
+    .btn-xs-block + .btn-block,
+    .btn-xs-block + .btn-xs-block {
+        margin-top: 0.5rem;
+    }
 }
