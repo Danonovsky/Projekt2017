@@ -1,10 +1,38 @@
 body {
-  background: #F0F0F0;
+  background: #E4E4E4;
   margin: 0px;
 }
 
 input, select, textarea {
   color: #000;
+}
+
+.fill{
+  min-height:100vh;
+}
+
+.main{
+  width:100%;
+  height:420px;
+}
+
+.highlighted{
+  background-color: #F7F6DF;
+  border: 1px solid #CC0;
+}
+
+.highlighted:hover{
+  border: 1px solid #FF3;
+}
+
+.announcments{
+  background-color: #FFF;
+  border: 1px solid #FFF;
+}
+
+.announcments:hover{
+  border: 1px solid #808080;
+  border-radius: 2px;
 }
 
 .top-panel{
@@ -27,19 +55,72 @@ input, select, textarea {
   background-color: #000;
 }
 
+h1{
+  font-family: 'Istok Web', sans-serif;
+}
+
 footer{
+  clear:both;
   height: 50px;
   padding: 10px 0px 30px;
   border-top: 1px solid #7C7C7C;
 }
 
 .previewPicture {
-  width: 200px;
-  height: auto;
+  width: auto;
+  height: 120px;
+  border: 2px solid #FFF;
+}
+
+.pictureBorder:hover{
+  border: 2px solid #606060;
+  border-radius:3px;
+}
+
+.smallPictures{
+  padding-top:10px;
+}
+
+.advertAnchor{
+  color: black;
+  font-size: 17px;
+}
+
+.menuAnchor, .menuAnchor:hover, .menuAnchor:active{
+  color: #000;
+  text-decoration: none;
+}
+
+.advertAnchor:hover{
+  background-color: #39F;
+  color: #000;
+  text-decoration: none;
+}
+
+.keyword {
+  color: #606060;
+  font-weight: 550;
+}
+
+.valueOfKeyword{
+  color: #404040;
+  font-weight: 550;
 }
 
 .margined{
-  margin:0px 15px;
+  padding:0px 15px;
+}
+
+.margin-bottom{
+  margin-bottom: 30px;
+}
+
+.bg-darker-white{
+  background-color: #EEE;
+}
+
+.bg-white{
+  background-color: #FFF;
 }
 
 @media (max-width: 767px) {

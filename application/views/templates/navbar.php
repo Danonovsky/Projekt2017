@@ -17,7 +17,7 @@
           foreach($cats as $a) {
             ?>
             <div class="dropdown pull-left dropdowns btn-xs-block">
-              <button class="btn btn-default btn-xs-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"><?=anchor(site_url('announcments/category/'.$a['id'].'/'.strtolower(str_replace('_','-',$a['name']))),str_replace('_',' ',$a['name']))?>
+              <button class="btn btn-default btn-xs-block dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown"><?=anchor(site_url('announcments/category/'.$a['id'].'/'.strtolower(str_replace('_','-',$a['name']))),str_replace('_',' ',$a['name']),$arrayName = array('class' =>'menuAnchor'))?>
                 <span class="caret"></span>
               </button>
               <?php
