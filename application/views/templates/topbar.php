@@ -4,7 +4,7 @@
   <?php
   if($this->userManager->isLogged()) {
     ?>
-    <p>Witaj, <?=anchor('profile',$this->session->userdata('name').' '.$this->session->userdata('surname')).', ( '.anchor(site_url('messages'),'Wiadomości').' ), '.anchor('wyloguj','Wyloguj')?></p>
+      <p class="user-anchor">Witaj, <?=anchor('profile',$this->session->userdata('name').' '.$this->session->userdata('surname'), $arrayName = array('class' => 'user-anchor')).', ( '.anchor(site_url('messages'),'Wiadomości', $arrayName = array('class' => 'user-anchor')).' ), '.anchor('wyloguj','Wyloguj', $arrayName = array('class' => 'user-anchor'))?></p>
     <?php
   }
   else {

@@ -81,6 +81,11 @@ footer{
   padding-top:10px;
 }
 
+.user-anchor, .user-anchor:hover, .user-anchor:active{
+  color: #202020;
+  font-weight: bold;
+}
+
 .advertAnchor{
   color: black;
   font-size: 17px;
@@ -138,6 +143,14 @@ footer{
 
 .bg-darker-white{
   background-color: #EEE;
+}
+
+.font-sizer{
+  font-size:14px;
+}
+
+.font-sizer-bigger{
+  font-size:18px;
 }
 
 .bg-white{

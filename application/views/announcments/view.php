@@ -21,6 +21,7 @@
               </div>
             <?php
           }
+          ?></div><?php
         }
         else {
           ?>
@@ -29,7 +30,6 @@
         }
 
         ?>
-        </div>
         <div class="col-sm-10 col-sm-offset-2">
           <h3>Szczegółowe dane: </h3>
           <div class="row">
