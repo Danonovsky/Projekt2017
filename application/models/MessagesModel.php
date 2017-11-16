@@ -15,8 +15,12 @@ class MessagesModel extends CI_Model {
       else $users[]=$a['ownerId'];
     }
     $users=array_unique($users, SORT_REGULAR);
-    $this->db->where_in('id',$users);
-    return $this->db->get('users')->result_array();
+    if($users) {
+      $this->db->where_in('id',$users);
+      return $this->db->get('users')->result_array();
+    }
+    else return array();
+
   }
 
   public function getAllMessages($id) {
