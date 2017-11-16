@@ -115,6 +115,27 @@ footer{
   margin-bottom: 30px;
 }
 
+.margin{
+  margin:10px;
+}
+
+.input-sizer{
+  width:300px;
+}
+
+.user-access{
+  border: 2px solid #808080;
+  border-radius: 8px;
+  padding:10px;
+}
+
+.user-errors{
+  border: 2px solid #A62A2A;
+  border-radius: 8px;
+  padding: 10px;
+  color: #A62A2A;
+}
+
 .bg-darker-white{
   background-color: #EEE;
 }

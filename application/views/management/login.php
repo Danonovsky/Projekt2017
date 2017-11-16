@@ -1,7 +1,7 @@
 <?php echo validation_errors(); ?>
 
 <?php echo form_open('management'); ?>
-
+<div class="fill">
   <label for='login'>Login:</label>
   <input type="text" name="login">
   <br>
@@ -19,3 +19,4 @@ if($this->session->flashdata('adminLoginMessage')) {
   echo $this->session->flashdata('adminLoginMessage');
 }
 ?>
+</div>

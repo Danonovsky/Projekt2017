@@ -1,22 +1,24 @@
-<?php echo validation_errors(); ?>
+<div class="col-lg-4 col-lg-offset-4 col-md-offset-1 col-md-10"><?php echo validation_errors(); ?></div>
 
 <?php echo form_open('page/login'); ?>
+<div class="fill col-lg-6 col-lg-offset-3 col-md-offset-1 col-md-10">
+  <div class="user-access bg-white col-lg-8 col-lg-offset-2">
+      <label class="margin label label-default" for='email'>E-mail:</label>
+      <input class="margin form-control input-sizer" type="email" name="email">
+      <br>
 
-  <label for='email'>E-mail:</label>
-  <input type="email" name="email">
-  <br>
+      <label class="margin label label-default" for='password'>Hasło:</label>
+      <input class="margin form-control input-sizer" type="password" name="password">
+      <br>
 
-  <label for='password'>Hasło:</label>
-  <input type="password" name="password">
-  <br>
+      <input class="margin btn btn-default" type="submit" name="submit" value="Zaloguj się">
+      <?php echo anchor('page/register','Nie posiadasz jeszcze konta? Zarejestruj się już teraz!',$arrayName = array('class' => 'advertAnchor' )); ?>
 
-  <input type="submit" name="submit" value="Zaloguj się">
-  <?php echo anchor('page/register','Nie posiadasz jeszcze konta? Zarejestruj się już teraz'); ?>
-
-</form>
-
-<?php
-if($this->session->flashdata('loginMessage')) {
-  echo $this->session->flashdata('loginMessage');
-}
-?>
+    </form>
+  </div>
+  <?php
+  if($this->session->flashdata('loginMessage')) {
+    echo $this->session->flashdata('loginMessage');
+  }
+  ?>
+</div>
