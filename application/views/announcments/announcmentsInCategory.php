@@ -7,7 +7,7 @@
       else $path='img/nofile.jpg';
       ?>
       <a href="<?=site_url('announcments/view/'.$highlighted[$i]['basic']['id'].'/'.$highlighted[$i]['basic']['slug'])?>">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 margin-bottom">
           <div class="highlighted margined">
               <img class="previewPicture img-responsive center-block" src="<?=base_url($path)?>" alt="zdjecie">
               <div><?=$highlighted[$i]['basic']['title']?></div>
@@ -24,7 +24,7 @@
       else $path='img/nofile.jpg';
       ?>
       <a href="<?=site_url('announcments/view/'.$announcments['basic'][$i]['id'].'/'.$announcments['basic'][$i]['slug'])?>">
-        <div class="col-lg-3 col-sm-6 col-md-3 col-xs-6">
+        <div class="col-lg-3 col-sm-6 col-md-3 col-xs-6 margin-bottom">
           <div class="announcments margined">
               <img class="previewPicture img-responsive center-block" src="<?=base_url($path)?>" alt="zdjecie">
               <div><?=$announcments['basic'][$i]['title']?></div>

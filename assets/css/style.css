@@ -102,6 +102,15 @@ footer{
   text-decoration: none;
 }
 
+.messageGetter{
+  background-color: #EEE;
+  text-align: right !important;
+}
+
+.messageOwner{
+  background-color: #DDD;
+}
+
 .keyword {
   color: #606060;
   font-weight: 550;
@@ -115,6 +124,9 @@ footer{
 .margined{
   padding:0px 15px;
 }
+.padding-bottom{
+  padding-bottom: 20px !important;
+}
 
 .margin-bottom{
   margin-bottom: 30px;
@@ -122,6 +134,14 @@ footer{
 
 .margin{
   margin:10px;
+}
+
+.margin-bottom{
+  margin-bottom: 10px;
+}
+
+.small-photo{
+  height: 50px;
 }
 
 .input-sizer{
