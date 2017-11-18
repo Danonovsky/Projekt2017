@@ -1,6 +1,6 @@
 <section class="top-panel">
   <div class="col-lg-12">
-    <div class="col-lg-6 col-lg-offset-3 col-md-offset-1 col-md-10 text-right top-padding"
+    <div class="col-lg-6 col-lg-offset-3 col-md-offset-1 col-md-10 text-right top-padding">
   <?php
   if($this->userManager->isLogged()) {
     ?>
