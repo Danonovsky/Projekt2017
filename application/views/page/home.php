@@ -1,3 +1,6 @@
+<?php
+print_r($announcments);
+ ?>
 <div class="fill">
 <div class="col-lg-6 col-lg-offset-3 col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1">
     <div class="row ss">

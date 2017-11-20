@@ -6,10 +6,12 @@ class Page extends CI_Controller {
     $this->load->library('session');
     $this->load->helper('url');
     $this->load->model('userManager');
+    $this->load->model('announcmentsManager');
   }
 
   public function index() {
     $data['title']=' Strona Główna';
+    $data['announcments']=$this->announcmentsManager->getAllHighlighted();
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topbar');
     $this->load->view('templates/navbar');
