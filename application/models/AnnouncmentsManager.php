@@ -64,6 +64,17 @@ class AnnouncmentsManager extends CI_Model {
     return $arr;
   }
 
+  public function getAllHighlighted() {
+    $this->db->order_by('untilDate','desc');
+    $highlighted=$this->db->get('highlighted',20)->result_array();
+    if(count($highlighted)==0) return false;
+    $arr=array();
+    foreach($highlighted as $a) {
+      $arr[]=array('basic'=>$a,'pics'=>$this->db->get_where('pictures',array('announcmentId'=>$a['id']))->result_array());
+    }
+    return $arr;
+  }
+
   public function countAnnouncments($id, $slug) {
     $almostMain=$this->db->get_where('categories',array('id'=>$id,'ownerId'=>'1'))->result_array();
     if(count($almostMain)>0) {
