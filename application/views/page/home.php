@@ -1,5 +1,4 @@
 <?php
-print_r($announcments);
  ?>
  <div class="fill">
    <div class="col-lg-6 col-lg-offset-3 col-md-offset-1 col-md-10">
@@ -14,7 +13,7 @@ print_r($announcments);
              <div class="highlighted margined">
                  <img class="previewPicture img-responsive center-block" src="<?=base_url($path)?>" alt="zdjecie">
                  <div><?=$announcments[$i]['basic']['title']?></div>
-                 <div>Price: <?=$announcments['basic'][$i]['price'].' PLN'?></div>
+                 <div>Price: <?=$announcments[$i]['basic']['price'].' PLN'?></div>
              </div>
            </div>
          </a>
