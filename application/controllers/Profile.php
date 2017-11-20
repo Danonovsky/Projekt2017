@@ -44,12 +44,27 @@ class Profile extends CI_Controller {
     $data['title']='Moje ogłoszenia';
     $data['list']=$data['announcments']=$this->profileManager->getAnnouncments($offset);
 
-    $config['base_url'] = site_url('profile/myAnnouncments');
-    $config['total_rows'] = $this->profileManager->countActiveAnnouncments();
-    $config['per_page'] = 30;
-    $config['use_page_numbers']=TRUE;
-
-    $this->pagination->initialize($config);
+    $this->pagination->initialize($config=array(
+      'base_url'=>site_url('profile/myAnnouncments'),
+      'total_rows'=>$this->profileManager->countActiveAnnouncments()),
+      'per_page'=>30,
+      'use_page_numbers'=>true,
+      'first_tag_open'=>'<li>',
+      'first_tag_close'=>'</li>',
+      'first_link'=>'<span aria-hidden="true">&laquo;</span>',
+      'first_url'=>site_url(),
+      'last_tag_open'=>'<li>',
+      'last_tag_close'=>'</li>',
+      'last_link'=>'<span aria-hidden="true">&raquo;</span>',
+      'next_tag_open'=>'<li>',
+      'next_tag_close'=>'</li>',
+      'prev_tag_open'=>'<li>',
+      'prev_tag_close'=>'</li>',
+      'cur_tag_open'=>'<li class="active"><a href="#">',
+      'cur_tag_close'=>'</a></li>',
+      'num_tag_open'=>'<li>',
+      'num_tag_close'=>'</li>'
+    ));
 
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topbar');
@@ -68,12 +83,27 @@ class Profile extends CI_Controller {
     $data['title']='Nieaktywne ogłoszenia';
     $data['list']=$data['announcments']=$this->profileManager->getUnactiveAnnouncments($offset);
 
-    $config['base_url'] = site_url('profile/myUnactiveAnnouncments');
-    $config['total_rows'] = $this->profileManager->countUnactiveAnnouncments();
-    $config['per_page'] = 1;
-    $config['use_page_numbers']=TRUE;
-
-    $this->pagination->initialize($config);
+    $this->pagination->initialize($config=array(
+      'base_url'=>site_url('profile/myUnactiveAnnouncments'),
+      'total_rows'=>$this->profileManager->countUnactiveAnnouncments()),
+      'per_page'=>30,
+      'use_page_numbers'=>true,
+      'first_tag_open'=>'<li>',
+      'first_tag_close'=>'</li>',
+      'first_link'=>'<span aria-hidden="true">&laquo;</span>',
+      'first_url'=>site_url(),
+      'last_tag_open'=>'<li>',
+      'last_tag_close'=>'</li>',
+      'last_link'=>'<span aria-hidden="true">&raquo;</span>',
+      'next_tag_open'=>'<li>',
+      'next_tag_close'=>'</li>',
+      'prev_tag_open'=>'<li>',
+      'prev_tag_close'=>'</li>',
+      'cur_tag_open'=>'<li class="active"><a href="#">',
+      'cur_tag_close'=>'</a></li>',
+      'num_tag_open'=>'<li>',
+      'num_tag_close'=>'</li>'
+    ));
 
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topbar');
