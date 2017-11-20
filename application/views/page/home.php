@@ -1,5 +1,3 @@
-<?php
- ?>
  <div class="fill">
    <div class="col-lg-6 col-lg-offset-3 col-md-offset-1 col-md-10">
      <?php
