@@ -70,7 +70,11 @@ class AnnouncmentsManager extends CI_Model {
     if(count($highlighted)==0) return false;
     $arr=array();
     foreach($highlighted as $a) {
-      $arr[]=array('basic'=>$a,'pics'=>$this->db->get_where('pictures',array('announcmentId'=>$a['id']))->result_array());
+      $this->db->where('categoryId in(select id from categories where ownerId='.$id.')');
+      $ann=$this->db->get_where('announcments',array('id'=>$a['announcmentId']))->row_array();
+      if(count($ann)>0) {
+        $arr[]=array('basic'=>$ann,'pics'=>$this->db->get_where('pictures',array('announcmentId'=>$ann['id']))->result_array());
+      }
     }
     return $arr;
   }
