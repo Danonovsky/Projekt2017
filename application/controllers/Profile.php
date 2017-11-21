@@ -46,7 +46,7 @@ class Profile extends CI_Controller {
 
     $this->pagination->initialize($config=array(
       'base_url'=>site_url('profile/myAnnouncments'),
-      'total_rows'=>$this->profileManager->countActiveAnnouncments()),
+      'total_rows'=>$this->profileManager->countActiveAnnouncments(),
       'per_page'=>30,
       'use_page_numbers'=>true,
       'first_tag_open'=>'<li>',
@@ -85,7 +85,7 @@ class Profile extends CI_Controller {
 
     $this->pagination->initialize($config=array(
       'base_url'=>site_url('profile/myUnactiveAnnouncments'),
-      'total_rows'=>$this->profileManager->countUnactiveAnnouncments()),
+      'total_rows'=>$this->profileManager->countUnactiveAnnouncments(),
       'per_page'=>30,
       'use_page_numbers'=>true,
       'first_tag_open'=>'<li>',
