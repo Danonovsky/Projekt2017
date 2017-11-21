@@ -454,7 +454,7 @@ ALTER TABLE `domy_jednorodzinnedetails`
 -- Constraints for table `highlighted`
 --
 ALTER TABLE `highlighted`
-  ADD CONSTRAINT `highlighted_ibfk_1` FOREIGN KEY (`announcmentId`) REFERENCES `announcments` (`id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `highlighted_ibfk_1` FOREIGN KEY (`announcmentId`) REFERENCES `announcments` (`id`) on delete cascade ON UPDATE CASCADE;
 
 --
 -- Constraints for table `messages`
