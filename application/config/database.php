@@ -75,10 +75,10 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => 'projekt2017',
+	'hostname' => 'mysql.cba.pl	',
+	'username' => 'sellit',
+	'password' => 'ZAQ!2wsx',
+	'database' => 'sellit',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
