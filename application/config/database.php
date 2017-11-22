@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'mkwk012.cba.pl	',
+	'hostname' => 'mysql.cba.pl	',
 	'username' => 'sellit',
 	'password' => 'ZAQ!2wsx',
 	'database' => 'sellit',
