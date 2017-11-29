@@ -132,7 +132,6 @@ class ProfileManager extends CI_Model {
         $photos[]=array('id'=>null,'announcmentId'=>$id,'path'=>$path);
       }
     }
-    print_r($photos);
     if(count($photos)>0) {
       $this->db->insert_batch('pictures',$photos);
     }

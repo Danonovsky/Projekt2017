@@ -6,9 +6,9 @@
       if(count($highlighted[$i]['pics'])>0) $path=$highlighted[$i]['pics'][0]['path'];
       else $path='img/nofile.jpg';
       ?>
-      <a href="<?=site_url('announcments/view/'.$highlighted[$i]['basic']['id'].'/'.$highlighted[$i]['basic']['slug'])?>">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 margin-bottom">
-          <div class="highlighted margined">
+      <a class="user-anchor" href="<?=site_url('announcments/view/'.$highlighted[$i]['basic']['id'].'/'.$highlighted[$i]['basic']['slug'])?>">
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 margin-bottom box-sizer">
+          <div class="highlighted">
               <img class="previewPicture img-responsive center-block" src="<?=base_url($path)?>" alt="zdjecie">
               <div><?=$highlighted[$i]['basic']['title']?></div>
               <div>Price: <?=$announcments['basic'][$i]['price'].' PLN'?></div>
@@ -23,9 +23,9 @@
       if(count($announcments['pics'][$i])>0) $path=$announcments['pics'][$i][0]['path'];
       else $path='img/nofile.jpg';
       ?>
-      <a href="<?=site_url('announcments/view/'.$announcments['basic'][$i]['id'].'/'.$announcments['basic'][$i]['slug'])?>">
-        <div class="col-lg-3 col-sm-6 col-md-3 col-xs-6 margin-bottom">
-          <div class="announcments margined">
+      <a class="user-anchor" href="<?=site_url('announcments/view/'.$announcments['basic'][$i]['id'].'/'.$announcments['basic'][$i]['slug'])?>">
+        <div class="col-lg-3 col-sm-6 col-md-3 col-xs-6 margin-bottom box-sizer">
+          <div class="announcments">
               <img class="previewPicture img-responsive center-block" src="<?=base_url($path)?>" alt="zdjecie">
               <div><?=$announcments['basic'][$i]['title']?></div>
               <div>Price: <?=$announcments['basic'][$i]['price'].' PLN'?></div>

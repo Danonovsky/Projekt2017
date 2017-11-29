@@ -6,10 +6,10 @@
          if(count($announcments[$i]['pics'])>0) $path=$announcments[$i]['pics'][0]['path'];
          else $path='img/nofile.jpg';
          ?>
-         <a href="<?=site_url('announcments/view/'.$announcments[$i]['basic']['id'].'/'.$announcments[$i]['basic']['slug'])?>">
-           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 margin-bottom">
-             <div class="highlighted margined">
-                 <img class="previewPicture img-responsive center-block" src="<?=base_url($path)?>" alt="zdjecie">
+         <a class="user-anchor" href="<?=site_url('announcments/view/'.$announcments[$i]['basic']['id'].'/'.$announcments[$i]['basic']['slug'])?>">
+           <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 margin-bottom box-sizer">
+             <div class="highlighted">
+                 <img class="previewPicture img-responsive center-block" src="<?=base_url($path)?>" alt="Image">
                  <div><?=$announcments[$i]['basic']['title']?></div>
                  <div>Price: <?=$announcments[$i]['basic']['price'].' PLN'?></div>
              </div>
