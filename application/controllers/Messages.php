@@ -35,7 +35,8 @@ class Messages extends CI_Controller {
 
     $data['userData']=$this->profileManager->getUserData($id);
     if(count($data['userData'])==0) {
-      redirect(site_url('messages'));
+      $message_403 = "Current user doesn't exists. ".anchor(site_url(),'Return to home.');
+      show_error($message_403 , 403 );
     }
 
     $this->load->library('form_validation');

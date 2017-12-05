@@ -59,7 +59,8 @@ class UserManager extends CI_Model {
 
   public function checkLogged() {
     if(!$this->session->has_userdata('logged')) {
-        redirect(site_url());
+      $message_403 = "You don't have access to the url you where trying to reach. ".anchor(site_url(),'Return to home.');
+      show_error($message_403 , 403 );
     }
   }
 

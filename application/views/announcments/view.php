@@ -75,7 +75,7 @@
         <p>Lokalizacja <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>: <?=$announcment['user']['city']?></p>
         <p>Nr telefonu <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>: <a href="tel:<?=$announcment['user']['phoneNr']?>"><?=$announcment['user']['phoneNr']?></a></p>
         <?php
-        if($this->session->userdata('id')!=$announcment['user']['id']) {
+        if($this->session->userdata('logged') && $this->session->userdata('id')!=$announcment['user']['id']) {
           ?>
           <p><a class="advertAnchor" href="<?=site_url('messages/conversation/'.$announcment['user']['id'])?>">Napisz wiadomość do sprzedawcy <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span></a> </p>
           <?php

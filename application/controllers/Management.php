@@ -40,8 +40,6 @@ class Management extends CI_Controller {
         }
       }
     }
-
-
   }
 
   public function newCategory() {
