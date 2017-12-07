@@ -1,6 +1,6 @@
 <div>
 <div class="fill">
-  <div class="bg-white margin-bottom col-lg-6 col-lg-offset-3 col-md-offset-1 col-md-10">
+  <div class="bg-white margin-bottom container">
 
       <h2><?=$announcment['basic']['title']?></h2>
 
@@ -25,7 +25,7 @@
         }
         else {
           ?>
-          <img class="previewPicture" src="<?=base_url('img/nofile.jpg')?>" alt="Brak zdjęcia">
+          <img class="img-responsive main" src="<?=base_url('img/nofile.jpg')?>" alt="Zdjęcie">
           <?php
         }
 

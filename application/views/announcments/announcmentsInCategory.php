@@ -1,5 +1,5 @@
 <div class="fill">
-  <div class="col-lg-6 col-lg-offset-3 col-md-offset-1 col-md-10">
+  <div class="container">
   <?php
   if(!empty($highlighted)) {
     for($i=0;$i<count($highlighted);$i++) {
@@ -8,10 +8,12 @@
       ?>
       <a class="user-anchor" href="<?=site_url('announcments/view/'.$highlighted[$i]['basic']['id'].'/'.$highlighted[$i]['basic']['slug'])?>">
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 margin-bottom box-sizer">
-          <div class="highlighted">
-              <img class="previewPicture img-responsive center-block" src="<?=base_url($path)?>" alt="zdjecie">
-              <div><?=$highlighted[$i]['basic']['title']?></div>
-              <div>Price: <?=$announcments['basic'][$i]['price'].' PLN'?></div>
+          <div class="panel panel-default">
+              <div class="panel-heading highlighted"><?=$highlighted[$i]['basic']['title']?><span class="glyphicon glyphicon-star-empty padding-left"></span></div>
+              <div class="panel-body no-padding">
+                <img class="previewPicture img-responsive center-block" src="<?=base_url($path)?>" alt="zdjecie">
+                <div class="price">Price: <?=$announcments['basic'][$i]['price'].' PLN'?></div>
+              </div>
           </div>
         </div>
       </a>
@@ -25,10 +27,12 @@
       ?>
       <a class="user-anchor" href="<?=site_url('announcments/view/'.$announcments['basic'][$i]['id'].'/'.$announcments['basic'][$i]['slug'])?>">
         <div class="col-lg-3 col-sm-6 col-md-3 col-xs-6 margin-bottom box-sizer">
-          <div class="announcments">
-              <img class="previewPicture img-responsive center-block" src="<?=base_url($path)?>" alt="zdjecie">
-              <div><?=$announcments['basic'][$i]['title']?></div>
-              <div>Price: <?=$announcments['basic'][$i]['price'].' PLN'?></div>
+          <div class="panel panel-default">
+              <div class="panel-heading"><?=$announcments['basic'][$i]['title']?></div>
+              <div class="panel-body no-padding">
+                <img class="previewPicture img-responsive center-block" src="<?=base_url($path)?>" alt="zdjecie">
+                <div class="price">Price: <?=$announcments['basic'][$i]['price'].' PLN'?></div>
+              </div>
           </div>
         </div>
       </a>
