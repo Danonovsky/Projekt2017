@@ -9,7 +9,9 @@
         ?>
         <div class="row bg-darker-white">
           <div class="col-lg-8 col-lg-offset-2 col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
-            <img class="img-responsive main" src="<?=base_url($announcment['pictures'][0]['path'])?>" alt="Zdjęcie">
+            <div class="col-lg-6 col-lg-offset-3">
+              <img class="img-responsive" src="<?=base_url($announcment['pictures'][0]['path'])?>" alt="Zdjęcie">
+            </div>
           </div>
         </div>
         <div class="row smallPictures bg-darker-white">
