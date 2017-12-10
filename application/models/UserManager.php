@@ -34,10 +34,11 @@ class UserManager extends CI_Model {
         'city'=>$result['city']
       );
       $this->session->set_userdata($data);
+      $this->session->set_flashdata('alert','Logged in.');
       return true;
     }
     else {
-      $this->session->set_flashdata('loginMessage','Błędny email i/lub hasło.');
+      $this->session->set_flashdata('alert','Błędny email i/lub hasło.');
       return false;
     }
   }
@@ -59,8 +60,8 @@ class UserManager extends CI_Model {
 
   public function checkLogged() {
     if(!$this->session->has_userdata('logged')) {
-      $message_403 = "You don't have access to the url you where trying to reach. ".anchor(site_url(),'Return to home.');
-      show_error($message_403 , 403 );
+      $this->session->set_flashdata('alert','Only logged user can access here.');
+      redirect(site_url());
     }
   }
 

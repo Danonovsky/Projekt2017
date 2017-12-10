@@ -26,8 +26,8 @@ class Admin extends CI_Model {
 
   public function checkAdmin() {
     if(!$this->session->userdata('adminLogged')) {
-      $message_403 = "You don't have access to the url you where trying to reach. ".anchor(site_url(),'Return to home.');
-      show_error($message_403 , 403 );
+      $this->session->set_flashdata('alert','Only logged admin can access here.');
+      redirect('management');
     }
   }
 

@@ -1,5 +1,4 @@
 <?php
-
 class Announcments extends CI_Controller {
   public function __construct() {
     parent::__construct();
@@ -27,10 +26,8 @@ class Announcments extends CI_Controller {
     }
 
     $data['announcments']=$this->announcmentsManager->getAnnouncments($id,$slug,$offset);
-    if($data['announcments']===false) {
-      show_404();
-    }
     $data['highlighted']=$this->announcmentsManager->getHighlighted($id);
+    $data['category']=$this->db->get_where('categories',array('id'=>$id))->row_array();
     $data['title']='Ogłoszenia - '.ucfirst(str_replace('-',' ',$slug));
 
     $this->pagination->initialize($config=array(
@@ -72,6 +69,7 @@ class Announcments extends CI_Controller {
     if($data['announcment']===false) {
       show_404();
     }
+    $data['category']=$this->db->get_where('categories',array('id'=>$data['announcment']['basic']['categoryId']))->row_array();
     $data['title']='Ogłoszenie - '.$data['announcment']['basic']['title'];
     $this->load->view('templates/header',$data);
     $this->load->view('templates/topbar');

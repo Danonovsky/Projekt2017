@@ -1,3 +1,11 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><?=anchor(site_url(),'Home')?></li>
+    <li><?=anchor('messages','Conversations')?></li>
+    <li class="active">Messages</li>
+  </ol>
+</div>
+
 <div class="fill col-lg-6 col-lg-offset-3 col-md-offset-1 col-md-10 col-xs-12">
   <div class="user-access bg-white col-lg-8 col-lg-offset-2">
     <span class="text-center"> <h3>Rozmowa z: <?=$userData['name'].' '.$userData['surname']?></h3> </span>

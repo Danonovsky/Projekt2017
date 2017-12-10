@@ -11,7 +11,6 @@ $(document).ready(function() {
         id: _id
       },
       success: function(data) {
-        console.log(data);
         $('#subData').html('');
         if(data['response']) {
           //success
@@ -21,7 +20,7 @@ $(document).ready(function() {
             if(data['response'][i]['Type']=='date') {
               placeholder=' placeholder="yyyy-mm-dd"';
             }
-            var element='<p><label for="'+x+'">'+x+': </label><input type="text" name="'+x+'"'+placeholder+'></p>';
+            var element='<p><label class="margin label label-primary" for="'+x+'">'+x+': </label><input class="margin form-control input-sizer" type="text" name="'+x+'"'+placeholder+'></p>';
             $(element).appendTo('#subData');
           }
         }

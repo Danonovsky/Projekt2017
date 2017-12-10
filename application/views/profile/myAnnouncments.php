@@ -1,3 +1,11 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><?=anchor(site_url(),'Home')?></li>
+    <li><?=anchor('profile','Profile')?></li>
+    <li class="active">My Announcments</li>
+  </ol>
+</div>
+
 <div class="fill col-lg-8 col-lg-offset-2 col-md-offset-1 col-md-10 col-xs-12">
   <div class="user-access bg-white col-lg-10 col-lg-offset-1">
     <?php

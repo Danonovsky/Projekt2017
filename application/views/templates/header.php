@@ -12,3 +12,13 @@
 
 <body>
   <input type="hidden" id="site_url" data-base-url="<?=base_url()?>">
+  <?php
+  if($this->session->flashdata('alert')) {
+    ?>
+    <div class="col-xs-10 col-xs-offset-1 col-md-6 col-md-offset-3 alert alert-info alert-dismissable fade in alert-fixed">
+      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      <?=$this->session->flashdata('alert')?>
+    </div>
+    <?php
+  }
+  ?>

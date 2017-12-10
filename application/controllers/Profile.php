@@ -261,7 +261,9 @@ class Profile extends CI_Controller {
       foreach($pics as $a) {
         unlink('./'.($a['path']));
       }
+      $this->session->set_flashdata('alert','Announcment deleted.');
     }
+    else $this->session->set_flashdata('alert','Announcment not deleted.');
 
     redirect(site_url('profile/myAnnouncments'));
   }
@@ -285,12 +287,6 @@ class Profile extends CI_Controller {
 
     $this->profileManager->highlightAnnouncment($id);
 
-    $data['title']='Wyróżnianie ogłoszenia';
-    $this->load->view('templates/header',$data);
-    $this->load->view('templates/topbar');
-    $this->load->view('templates/navbar');
-    $this->load->view('profile/highlightAnnouncment');
-    $this->load->view('templates/footer');
-    $this->load->view('templates/end');
+    redirect('profile/myAnnouncments');
   }
 }

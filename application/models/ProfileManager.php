@@ -23,11 +23,11 @@ class ProfileManager extends CI_Model {
     );
     $result=$this->db->update('users',$data,$where);
     if($result) {
-      $this->session->set_flashdata(array('updateMessage'=>'Zapisano zmiany.'));
+      $this->session->set_flashdata(array('alert'=>'Zapisano zmiany.'));
       return true;
     }
     else {
-      $this->session->set_flashdata(array('updateMessage'=>'Nie udało się zapisać zmian.'));
+      $this->session->set_flashdata(array('alert'=>'Nie udało się zapisać zmian.'));
       return false;
     }
   }
@@ -48,14 +48,14 @@ class ProfileManager extends CI_Model {
     if(md5($this->input->post('actualPassword'))==$password) {
       $result=$this->db->update('users',$data,$where);
       if($result) {
-        $this->session->set_flashdata(array('passwordMessage'=>'Hasło zostało zmienione.'));
+        $this->session->set_flashdata(array('alert'=>'Hasło zostało zmienione.'));
       }
       else {
-        $this->session->set_flashdata(array('passwordMessage'=>'Nie udało się zmienić hasła.'));
+        $this->session->set_flashdata(array('alert'=>'Nie udało się zmienić hasła.'));
       }
     }
     else {
-      $this->session->set_flashdata(array('passwordMessage'=>'Podane hasło jest nieprawidłowe.'));
+      $this->session->set_flashdata(array('alert'=>'Podane hasło jest nieprawidłowe.'));
     }
   }
 
@@ -141,7 +141,7 @@ class ProfileManager extends CI_Model {
     $this->db->trans_complete();
 
     if($this->db->trans_status()===false) {
-      $this->session->set_flashdata('addAnnouncmentError','Wystąpił błąd podczas dodawania ogłoszenia. Spróbuj ponownie.');
+      $this->session->set_flashdata('alert','Wystąpił błąd podczas dodawania ogłoszenia. Spróbuj ponownie.');
       return false;
     }
     else {
@@ -218,9 +218,11 @@ class ProfileManager extends CI_Model {
     $this->db->trans_complete();
 
     if($this->db->trans_status()===false) {
+      $this->session->set_flashdata('alert','Announcment changed.');
       return false;
     }
     else {
+      $this->session->set_flashdata('alert','Error. Announcment not chabged.');
       return true;
     }
 
@@ -233,7 +235,10 @@ class ProfileManager extends CI_Model {
     $newDate = date("Y-m-d", strtotime("+1 month", $date));
     $arr= array('untilDate'=>$newDate);
 
-    $this->db->update('announcments',$arr,array('id'=>$id));
+    if($this->db->update('announcments',$arr,array('id'=>$id))) {
+      $this->session->set_flashdata('alert','Announcment renewed.');
+    }
+    else $this->session->set_flashdata('alert','Error. Announcment not renewed.');
   }
 
   public function highlightAnnouncment($id) {
@@ -245,7 +250,7 @@ class ProfileManager extends CI_Model {
     }
 
     if(!$willBeHighlighted) {
-      $this->session->set_flashdata('highlightMessage','Posiadasz już jedno wyróżnione ogłoszenie.');
+      $this->session->set_flashdata('alert','Posiadasz już jedno wyróżnione ogłoszenie.');
     }
     else {
       $ann=$this->db->get_where('announcments',array('id'=>$id))->row_array();
@@ -268,10 +273,10 @@ class ProfileManager extends CI_Model {
       $this->db->trans_complete();
 
       if($this->db->trans_status()===false) {
-        $this->session->set_flashdata('highlightMessage','Wystąpił błąd. Spróbuj ponownie.');
+        $this->session->set_flashdata('alert','Wystąpił błąd. Spróbuj ponownie.');
       }
       else {
-        $this->session->set_flashdata('highlightMessage','Ogłoszenie zostało wyróżnione.');
+        $this->session->set_flashdata('alert','Ogłoszenie zostało wyróżnione.');
       }
     }
   }

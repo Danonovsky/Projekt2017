@@ -28,7 +28,6 @@ class Management extends CI_Controller {
 
       if($this->form_validation->run()===false) {
         $this->load->view('templates/header',$data);
-        $this->load->view('templates/managementTopbar');
         $this->load->view('templates/navbar');
         $this->load->view('management/login');
         $this->load->view('templates/footer');

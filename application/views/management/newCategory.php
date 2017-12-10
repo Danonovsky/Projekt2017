@@ -1,3 +1,11 @@
+<div class="container">
+  <ol class="breadcrumb">
+    <li><?=anchor(site_url(),'Home')?></li>
+    <li><?=anchor('management','Management')?></li>
+    <li class="active">New Category</li>
+  </ol>
+</div>
+
 <div class="col-lg-4 col-lg-offset-4 col-md-offset-1 col-md-10"><?php echo validation_errors(); ?></div>
 
 <?php echo form_open('management/newCategory'); ?>
@@ -47,12 +55,6 @@
       </p>
 
     </form>
-
-    <?php
-    if($this->session->flashdata('adminLoginMessage')) {
-      echo $this->session->flashdata('adminLoginMessage');
-    }
-    ?>
     </div>
   </div>
 </div>

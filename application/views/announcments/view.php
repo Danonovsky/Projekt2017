@@ -1,7 +1,13 @@
 <div>
 <div class="fill">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li><?=anchor(site_url(),'Home')?></li>
+      <li><?=anchor('announcments/category/'.$category['id'].'/'.str_replace('_','-',$category['name']),ucfirst(str_replace('_',' ',$category['name'])))?></li>
+      <li class="active"><?=ucfirst($announcment['basic']['title'])?></li>
+    </ol>
+  </div>
   <div class="bg-white margin-bottom container">
-
       <h2><?=$announcment['basic']['title']?></h2>
 
       <?php

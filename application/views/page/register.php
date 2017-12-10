@@ -2,6 +2,10 @@
 
 <?php echo form_open('page/register'); ?>
 <div class="fill col-lg-6 col-lg-offset-3 col-md-offset-1 col-md-10 col-xs-12">
+  <ol class="breadcrumb">
+    <li><?=anchor(site_url(),'Home')?></li>
+    <li class="active">Register</li>
+  </ol>
   <div class="user-access bg-white col-lg-8 col-lg-offset-2">
     <div id="name">
       <label class="margin label label-default" for='name'>Imię:</label>
