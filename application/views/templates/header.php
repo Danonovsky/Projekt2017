@@ -11,6 +11,7 @@
 </head>
 
 <body>
+  <input type="hidden" id="senderId" value="<?=$this->session->userdata('id')?>">
   <input type="hidden" id="site_url" data-base-url="<?=base_url()?>">
   <?php
   if($this->session->flashdata('alert')) {

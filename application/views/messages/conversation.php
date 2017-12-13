@@ -35,9 +35,10 @@
     <p>
       <?=validation_errors()?>
 
-      <?=form_open('messages/conversation/'.$userData['id'])?>
+      <?=form_open('',array('id'=>'sendMessage'))?>
         <label class="margin label label-default" for="message">Wiadomość: </label>
-        <textarea class="margin form-control input-sizer" name="message" placeholder="Wpisz wiadomość"></textarea>
+        <input type="hidden" id="receiverId" value="<?=$userData['id']?>">
+        <textarea id="messageContent" class="margin form-control input-sizer" style="resize: none;" name="message" placeholder="Wpisz wiadomość"></textarea>
         <input class="margin btn btn-default" type="submit" value="Wyślij!">
       </form>
     </p>
