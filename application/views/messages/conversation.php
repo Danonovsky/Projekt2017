@@ -1,3 +1,8 @@
+<?php
+$user=$this->session->userdata('name').' '.$this->session->userdata('surname');
+$user1=$this->session->userdata('name').' '.$this->session->userdata('surname');
+ ?>
+
 <div class="container">
   <ol class="breadcrumb">
     <li><?=anchor(site_url(),'Home')?></li>
@@ -6,32 +11,37 @@
   </ol>
 </div>
 
-<div class="fill col-lg-6 col-lg-offset-3 col-md-offset-1 col-md-10 col-xs-12">
-  <div class="user-access bg-white col-lg-8 col-lg-offset-2">
+<input type="hidden" id="hisName" name="" value="<?=$userData['name'].' '.$userData['surname']?>">
+<input type="hidden" id="myName" name="" value="<?=$user?>">
+
+<div class="container">
+  <div class="user-access bg-white">
     <span class="text-center"> <h3>Rozmowa z: <?=$userData['name'].' '.$userData['surname']?></h3> </span>
-    <?php
-    if(count($messages)>0) {
-      foreach($messages as $a) {
-        if($a['ownerId']==$this->session->userdata('id')) {
-          $class='messageOwner';
-          $user=$this->session->userdata('name').' '.$this->session->userdata('surname');
+    <div id="messageList">
+      <?php
+      if(count($messages)>0) {
+        foreach($messages as $a) {
+          if($a['ownerId']==$this->session->userdata('id')) {
+            $class='messageOwner';
+            $user=$this->session->userdata('name').' '.$this->session->userdata('surname');
+          }
+          else {
+            $class='messageGetter';
+            $user=$userData['name'].' '.$userData['surname'];
+          }
+          ?>
+          <div class="<?=$class?>">
+            <span><?=$user?></span>
+            <span><sup><?=$a['date']?></sup></span>
+            <p style="word-wrap: break-word;overflow-wrap:break-word">
+              <?=$a['content']?>
+            </p>
+          </div>
+          <?php
         }
-        else {
-          $class='messageGetter';
-          $user=$userData['name'].' '.$userData['surname'];
-        }
-        ?>
-        <div class="<?=$class?>">
-          <span><?=$a['date']?></span>
-          <span><?=$user?></span>
-          <p>
-            <?=$a['content']?>
-          </p>
-        </div>
-        <?php
       }
-    }
-    ?>
+      ?>
+    </div>
     <p>
       <?=validation_errors()?>
 

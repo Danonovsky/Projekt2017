@@ -199,3 +199,8 @@ footer{
   color: #fff;
   transition: .20s ease;
 }
+
+#messageList {
+  height:50.7vh;
+  overflow-y: auto;
+}

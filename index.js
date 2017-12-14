@@ -8,7 +8,8 @@ var con=mysql.createConnection({
   host:"localhost",
   user:"root",
   password:"",
-  database:"projekt2017"
+  database:"projekt2017",
+  dateStrings: 'date'
 });
 
 if(con) console.log("dbconnected");
@@ -21,20 +22,20 @@ io.sockets.on('connection', function (socket) {
 
    socket.on('messageSend', function(msg){
      console.log(msg);
-     con.connect(function(err){
+     var sql="insert into messages(ownerId,toId,content) values ?";
+     var values=[
+       [msg['senderId'],msg['receiverId'],msg['content']]
+     ];
+     con.query(sql,[values], function(err,result) {
        if(err) throw err;
-       console.log("Connected!");
-       var sql="insert into messages(ownerId,toId,content) values ?";
-       var values=[
-         [msg['senderId'],msg['receiverId'],msg['content']]
-       ];
-       con.query(sql,[values], function(err,result) {
+       console.log("Number of records inserted: " +result.affectedRows);
+       var insertedId=result.insertId;
+       con.query("select * from messages where id='"+insertedId+"'", function(err,result) {
          if(err) throw err;
-         console.log("Number of records inserted: " +result.affectedRows);
-         io.emit('messageSent',msg);
+         io.emit('messageSent',result);
        });
-     });
 
+     });
    });
 
 });
